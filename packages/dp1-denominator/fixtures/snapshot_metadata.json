@@ -1,0 +1,19 @@
+{
+  "snapshot_id": "snap:2026-08-26:1bc81a17997a6764",
+  "source_name": "fixture-seed",
+  "source_kind": "fixture",
+  "source_url": "https://example.invalid/dp1/fixture-seed",
+  "query_date": "2026-08-26",
+  "adapter_name": "fixture",
+  "input_path": "fixtures/_frozen.csv",
+  "input_sha256": "1bc81a17997a67644651a86f9c75b456ffd590ad06fe64de4ce09883453e6f9d",
+  "record_count": 6,
+  "layer_counts": {
+    "L1-A": 2,
+    "L1-B": 1,
+    "L2": 1,
+    "L3": 2
+  },
+  "freeze_status": "待核",
+  "verification_note": "机械快照元数据；来源结论与纳入裁决仍待核。"
+}

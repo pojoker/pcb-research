@@ -1,0 +1,26 @@
+[
+  {
+    "mention_id": "prismark-window",
+    "carrier_url": "https://example-prismark-window.invalid/pcb-outlook",
+    "origin_source_id": "origin-prismark-2025-outlook",
+    "independence_group": "prismark",
+    "claim_key": "pcb-outlook-2025-growth",
+    "text": "Prismark outlook cites 1,234.0 units and 8.5% growth."
+  },
+  {
+    "mention_id": "broker-reprint",
+    "carrier_url": "https://broker-research.invalid/pcb-note",
+    "origin_source_id": "origin-prismark-2025-outlook",
+    "independence_group": "prismark",
+    "claim_key": "pcb-outlook-2025-growth",
+    "text": "The cited market figure is 1234 units, with 8.50% growth."
+  },
+  {
+    "mention_id": "self-media-repost",
+    "carrier_url": "https://self-media.invalid/pcb-repost",
+    "origin_source_id": "origin-prismark-2025-outlook",
+    "independence_group": "prismark",
+    "claim_key": "pcb-outlook-2025-growth",
+    "text": "A repost repeats 1,234 units and 8.5% growth."
+  }
+]

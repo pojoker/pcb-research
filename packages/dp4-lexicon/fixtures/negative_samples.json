@@ -1,0 +1,26 @@
+[
+  {
+    "fixture_id": "sap-software",
+    "category": "SAP",
+    "text": "企业采购SAP软件并由软件公司实施系统。",
+    "expected_matches": []
+  },
+  {
+    "fixture_id": "hdi-isocyanate",
+    "category": "HDI",
+    "text": "六亚甲基二异氰酸酯（HDI）用于聚氨酯固化剂。",
+    "expected_matches": []
+  },
+  {
+    "fixture_id": "bt-bluetooth",
+    "category": "BT",
+    "text": "产品支持Bluetooth蓝牙和BT下载功能。",
+    "expected_matches": []
+  },
+  {
+    "fixture_id": "pcb-pollution",
+    "category": "PCB",
+    "text": "多氯联苯（PCB）属于污染物，受斯德哥尔摩公约约束。",
+    "expected_matches": []
+  }
+]

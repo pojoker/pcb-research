@@ -1,0 +1,92 @@
+[
+  {
+    "term": "覆铜板",
+    "match_mode": "literal",
+    "include_patterns": [],
+    "exclude_patterns": [],
+    "target_cell": "M1",
+    "case_policy": "sensitive",
+    "test_fixture_ids": ["ccl-positive", "ccl-double-count-boundary"]
+  },
+  {
+    "term": "电子电路铜箔",
+    "match_mode": "context_all",
+    "include_patterns": ["电子电路", "覆铜板|板厂"],
+    "exclude_patterns": ["电池|负极|动力|锂电|储能"],
+    "target_cell": "M3",
+    "case_policy": "sensitive",
+    "test_fixture_ids": ["foil-positive", "lithium-foil-negative"]
+  },
+  {
+    "term": "半固化片",
+    "match_mode": "literal",
+    "include_patterns": [],
+    "exclude_patterns": [],
+    "target_cell": "M2",
+    "case_policy": "sensitive",
+    "test_fixture_ids": ["pp-positive"]
+  },
+  {
+    "term": "PCB裸板",
+    "match_mode": "context_any",
+    "include_patterns": ["裸板|印制板|线路板"],
+    "exclude_patterns": ["多氯联苯|污染物|斯德哥尔摩|公约"],
+    "target_cell": "FAB1",
+    "case_policy": "insensitive",
+    "test_fixture_ids": ["pcb-positive", "pcb-pollution"]
+  },
+  {
+    "term": "mSAP",
+    "match_mode": "context_any",
+    "include_patterns": ["制程|半加成|线路"],
+    "exclude_patterns": ["SAP软件|软件公司"],
+    "target_cell": "P5",
+    "case_policy": "insensitive",
+    "test_fixture_ids": ["sap-positive", "sap-software"]
+  },
+  {
+    "term": "HDI板",
+    "match_mode": "context_2_of",
+    "include_patterns": ["阶", "微盲孔", "任意层", "线路"],
+    "exclude_patterns": ["异氰酸酯|聚氨酯|固化剂"],
+    "target_cell": "FAB1",
+    "case_policy": "insensitive",
+    "test_fixture_ids": ["hdi-positive", "hdi-boundary-one-signal", "hdi-isocyanate"]
+  },
+  {
+    "term": "BT树脂",
+    "match_mode": "literal",
+    "include_patterns": [],
+    "exclude_patterns": ["蓝牙|Bluetooth|下载"],
+    "target_cell": "M9",
+    "case_policy": "insensitive",
+    "test_fixture_ids": ["bt-resin-positive", "bt-bluetooth"]
+  },
+  {
+    "term": "BT载板",
+    "match_mode": "literal",
+    "include_patterns": [],
+    "exclude_patterns": ["蓝牙|Bluetooth|下载"],
+    "target_cell": "FAB2",
+    "case_policy": "insensitive",
+    "test_fixture_ids": ["bt-board-positive", "bt-bluetooth"]
+  },
+  {
+    "term": "PI膜",
+    "match_mode": "context_any",
+    "include_patterns": ["软板|聚酰亚胺|挠性"],
+    "exclude_patterns": [],
+    "target_cell": "FLX",
+    "case_policy": "sensitive",
+    "test_fixture_ids": ["pi-positive"]
+  },
+  {
+    "term": "AOI检测",
+    "match_mode": "context_any",
+    "include_patterns": ["检测|光学"],
+    "exclude_patterns": ["兴趣点|地图|GIS"],
+    "target_cell": "EQ5",
+    "case_policy": "insensitive",
+    "test_fixture_ids": ["aoi-positive"]
+  }
+]

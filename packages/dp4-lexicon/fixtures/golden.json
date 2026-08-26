@@ -1,0 +1,104 @@
+[
+  {
+    "fixture_id": "ccl-positive",
+    "kind": "positive",
+    "text": "公司采购覆铜板作为板厂投入件。",
+    "expected_matches": ["覆铜板"]
+  },
+  {
+    "fixture_id": "ccl-double-count-boundary",
+    "kind": "boundary",
+    "text": "覆铜板含箔价值不能再计一次独立商品箔供给。",
+    "expected_matches": ["覆铜板"]
+  },
+  {
+    "fixture_id": "pp-positive",
+    "kind": "positive",
+    "text": "板厂采购半固化片用于叠板压合。",
+    "expected_matches": ["半固化片"]
+  },
+  {
+    "fixture_id": "foil-positive",
+    "kind": "positive",
+    "text": "公司向板厂供应电子电路铜箔，用于电路板制造。",
+    "expected_matches": ["电子电路铜箔"]
+  },
+  {
+    "fixture_id": "lithium-foil-negative",
+    "kind": "negative",
+    "text": "公司主要生产锂电铜箔，用于电池负极和储能。",
+    "expected_matches": []
+  },
+  {
+    "fixture_id": "pcb-positive",
+    "kind": "positive",
+    "text": "公司具备PCB裸板制造能力，面向通信设备客户。",
+    "expected_matches": ["PCB裸板"]
+  },
+  {
+    "fixture_id": "pcb-pollution",
+    "kind": "negative",
+    "text": "多氯联苯（PCB）属于污染物，受斯德哥尔摩公约约束。",
+    "expected_matches": []
+  },
+  {
+    "fixture_id": "sap-positive",
+    "kind": "positive",
+    "text": "该线路采用mSAP制程和半加成工艺。",
+    "expected_matches": ["mSAP"]
+  },
+  {
+    "fixture_id": "sap-software",
+    "kind": "negative",
+    "text": "企业采购SAP软件并由软件公司实施系统。",
+    "expected_matches": []
+  },
+  {
+    "fixture_id": "hdi-positive",
+    "kind": "positive",
+    "text": "HDI板采用微盲孔、任意层互连和细线路设计。",
+    "expected_matches": ["HDI板"]
+  },
+  {
+    "fixture_id": "hdi-boundary-one-signal",
+    "kind": "boundary",
+    "text": "HDI板仅披露具备微盲孔能力，其他结构信息未知。",
+    "expected_matches": []
+  },
+  {
+    "fixture_id": "hdi-isocyanate",
+    "kind": "negative",
+    "text": "六亚甲基二异氰酸酯（HDI）用于聚氨酯固化剂。",
+    "expected_matches": []
+  },
+  {
+    "fixture_id": "bt-resin-positive",
+    "kind": "positive",
+    "text": "BT树脂用于封装基板的绝缘层。",
+    "expected_matches": ["BT树脂"]
+  },
+  {
+    "fixture_id": "bt-board-positive",
+    "kind": "positive",
+    "text": "公司开发BT载板并服务半导体封装。",
+    "expected_matches": ["BT载板"]
+  },
+  {
+    "fixture_id": "bt-bluetooth",
+    "kind": "negative",
+    "text": "产品支持Bluetooth蓝牙和BT下载功能。",
+    "expected_matches": []
+  },
+  {
+    "fixture_id": "pi-positive",
+    "kind": "positive",
+    "text": "PI膜是挠性软板的关键材料。",
+    "expected_matches": ["PI膜"]
+  },
+  {
+    "fixture_id": "aoi-positive",
+    "kind": "positive",
+    "text": "产线配置AOI检测设备进行光学检查。",
+    "expected_matches": ["AOI检测"]
+  }
+]

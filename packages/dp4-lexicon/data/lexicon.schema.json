@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "DP4 candidate lexicon entry",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": [
+      "term",
+      "match_mode",
+      "include_patterns",
+      "exclude_patterns",
+      "target_cell",
+      "case_policy",
+      "test_fixture_ids"
+    ],
+    "properties": {
+      "term": {"type": "string", "minLength": 1},
+      "match_mode": {
+        "enum": ["literal", "regex", "context_any", "context_all", "context_2_of"]
+      },
+      "include_patterns": {"type": "array", "items": {"type": "string"}},
+      "exclude_patterns": {"type": "array", "items": {"type": "string"}},
+      "target_cell": {"type": "string", "minLength": 1},
+      "case_policy": {"enum": ["sensitive", "insensitive"]},
+      "test_fixture_ids": {"type": "array", "items": {"type": "string"}}
+    }
+  }
+}

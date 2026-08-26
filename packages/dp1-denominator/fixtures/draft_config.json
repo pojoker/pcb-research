@@ -1,0 +1,25 @@
+{
+  "fixture_path": "draft_payload.json",
+  "field_map": {
+    "entity_id": "code",
+    "issuer_id": "code",
+    "name": "name"
+  },
+  "id_prefixes": {
+    "entity_id": "issuer:TW:",
+    "issuer_id": "issuer:TW:"
+  },
+  "defaults": {
+    "entity_type": "issuer",
+    "legal_entity_id": "-",
+    "plant_id": "-",
+    "group_id": "group:zhending",
+    "registration_source": "配置源待核",
+    "source_url": "https://example.invalid/dp1/configured-source",
+    "query_date": "2026-08-26",
+    "double_count_key": "dcg:zhending",
+    "double_count_rule": "母子双上市",
+    "aggregation_policy": "分列-禁止加总",
+    "product_scope": "待核"
+  }
+}
