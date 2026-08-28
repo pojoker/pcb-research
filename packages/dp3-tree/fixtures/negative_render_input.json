@@ -1,0 +1,9 @@
+{
+  "attachments": [
+    {"attachment_id": "attach-out", "cell_id": "OUT"}
+  ],
+  "coverage": [
+    {"cell_id": "M6", "status": "covered"},
+    {"cell_id": "FAB1", "status": "not-a-status"}
+  ]
+}

@@ -1,0 +1,35 @@
+[
+  {
+    "fixture_id": "duplicate-map",
+    "records": [
+      {"process_id": "P1", "equipment_id": "EQ1"},
+      {"process_id": "P1", "equipment_id": "EQ1"}
+    ],
+    "expected_error": "duplicate mapping"
+  },
+  {
+    "fixture_id": "unknown-process",
+    "records": [{"process_id": "P10", "equipment_id": "EQ1"}],
+    "expected_error": "active P* cell"
+  },
+  {
+    "fixture_id": "unknown-equipment",
+    "records": [{"process_id": "P1", "equipment_id": "EQ8"}],
+    "expected_error": "active EQ* cell"
+  },
+  {
+    "fixture_id": "unmapped-default-eq7",
+    "records": [{"process_id": "P7", "equipment_id": "EQ7"}],
+    "expected_error": "no default EQ6/EQ7 fallback"
+  },
+  {
+    "fixture_id": "unknown-operation",
+    "records": [{"process_id": "P0", "equipment_id": "EQ6"}],
+    "expected_error": "active P* cell"
+  },
+  {
+    "fixture_id": "process-material-is-not-process",
+    "records": [{"process_id": "PM1", "equipment_id": "EQ1"}],
+    "expected_error": "active P* cell"
+  }
+]

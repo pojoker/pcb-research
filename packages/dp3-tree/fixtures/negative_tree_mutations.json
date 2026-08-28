@@ -1,0 +1,6 @@
+[
+  {"fixture_id": "draft-status", "field": "status", "value": "draft", "expected_error": "status must be 'frozen'"},
+  {"fixture_id": "missing-cell", "field": "cell_count", "value": 29, "expected_error": "exactly 30"},
+  {"fixture_id": "reserved-m6", "field": "reserved_cell", "value": "M6", "expected_error": "M6/M8"},
+  {"fixture_id": "route-cell-value", "field": "route_value", "value": "M4", "expected_error": "route values"}
+]

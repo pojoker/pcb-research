@@ -1,0 +1,12 @@
+{
+  "attachments": [
+    {"attachment_id": "attach-fab1", "cell_id": "FAB1"},
+    {"attachment_id": "attach-m4", "cell_id": "M4"},
+    {"attachment_id": "attach-p1", "cell_id": "P1"}
+  ],
+  "coverage": [
+    {"cell_id": "FAB1", "status": "covered"},
+    {"cell_id": "FAB2", "status": "empty"},
+    {"cell_id": "M4", "status": "covered"}
+  ]
+}

@@ -1,0 +1,8 @@
+[
+  {"process_id": "P1", "equipment_id": "EQ1"},
+  {"process_id": "P1", "equipment_id": "EQ7"},
+  {"process_id": "P5", "equipment_id": "EQ1"},
+  {"process_id": "P5", "equipment_id": "EQ7"},
+  {"process_id": "P8", "equipment_id": "EQ6"},
+  {"process_id": "P9", "equipment_id": "EQ5"}
+]

@@ -1,0 +1,42 @@
+[
+  {
+    "sample_id": "sample-fab1-hdi",
+    "entity_id": "issuer:CN:demo-fab1",
+    "entity_name": "示例电子",
+    "role": "裸板制造",
+    "sample_kind": "board",
+    "cell_id": "FAB1",
+    "product_family": "HDI",
+    "outside_neighbor": ""
+  },
+  {
+    "sample_id": "sample-fab2-substrate",
+    "entity_id": "issuer:CN:demo-fab2",
+    "entity_name": "示例载板",
+    "role": "载板制造",
+    "sample_kind": "capability",
+    "cell_id": "FAB2",
+    "product_family": "IC 载板",
+    "outside_neighbor": ""
+  },
+  {
+    "sample_id": "sample-m1-rigid-capability",
+    "entity_id": "issuer:CN:demo-material",
+    "entity_name": "示例材料",
+    "role": "材料供应",
+    "sample_kind": "capability",
+    "cell_id": "M1",
+    "product_family": "普通刚性",
+    "outside_neighbor": ""
+  },
+  {
+    "sample_id": "sample-outside-pcba",
+    "entity_id": "issuer:CN:demo-pcba",
+    "entity_name": "示例贴装",
+    "role": "树外邻居",
+    "sample_kind": "outside",
+    "cell_id": "",
+    "product_family": "PCBA",
+    "outside_neighbor": "PCBA"
+  }
+]

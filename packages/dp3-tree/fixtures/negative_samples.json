@@ -1,0 +1,114 @@
+[
+  {
+    "fixture_id": "m6-target",
+    "records": [
+      {
+        "sample_id": "bad-m6",
+        "entity_id": "issuer:CN:bad-m6",
+        "entity_name": "示例企业",
+        "role": "裸板制造",
+        "sample_kind": "board",
+        "cell_id": "M6",
+        "product_family": "普通刚性",
+        "outside_neighbor": ""
+      }
+    ],
+    "expected_error": "not an active tree cell"
+  },
+  {
+    "fixture_id": "m8-target",
+    "records": [
+      {
+        "sample_id": "bad-m8",
+        "entity_id": "issuer:CN:bad-m8",
+        "entity_name": "示例企业",
+        "role": "裸板制造",
+        "sample_kind": "board",
+        "cell_id": "M8",
+        "product_family": "普通刚性",
+        "outside_neighbor": ""
+      }
+    ],
+    "expected_error": "not an active tree cell"
+  },
+  {
+    "fixture_id": "out-fake-cell",
+    "records": [
+      {
+        "sample_id": "bad-out",
+        "entity_id": "issuer:CN:bad-out",
+        "entity_name": "示例企业",
+        "role": "裸板制造",
+        "sample_kind": "board",
+        "cell_id": "OUT",
+        "product_family": "普通刚性",
+        "outside_neighbor": ""
+      }
+    ],
+    "expected_error": "not an active tree cell"
+  },
+  {
+    "fixture_id": "pcba-on-fab",
+    "records": [
+      {
+        "sample_id": "bad-pcba-fab",
+        "entity_id": "issuer:CN:bad-pcba-fab",
+        "entity_name": "示例贴装",
+        "role": "裸板制造",
+        "sample_kind": "board",
+        "cell_id": "FAB1",
+        "product_family": "PCBA",
+        "outside_neighbor": ""
+      }
+    ],
+    "expected_error": "outside product_family"
+  },
+  {
+    "fixture_id": "ic-substrate-on-fab1",
+    "records": [
+      {
+        "sample_id": "bad-substrate-fab1",
+        "entity_id": "issuer:CN:bad-substrate-fab1",
+        "entity_name": "示例载板",
+        "role": "载板制造",
+        "sample_kind": "board",
+        "cell_id": "FAB1",
+        "product_family": "IC 载板",
+        "outside_neighbor": ""
+      }
+    ],
+    "expected_error": "must attach to FAB2"
+  },
+  {
+    "fixture_id": "bare-board-without-cell",
+    "records": [
+      {
+        "sample_id": "bad-no-cell",
+        "entity_id": "issuer:CN:bad-no-cell",
+        "entity_name": "示例企业",
+        "role": "裸板制造",
+        "sample_kind": "board",
+        "cell_id": "",
+        "product_family": "普通刚性",
+        "outside_neighbor": ""
+      }
+    ],
+    "expected_error": "requires a legal cell_id"
+  },
+  {
+    "fixture_id": "raw-board-factory",
+    "records": [
+      {
+        "sample_id": "bad-raw-board-factory",
+        "entity_id": "板厂",
+        "entity_name": "板厂",
+        "role": "板厂",
+        "sample_kind": "board",
+        "cell_id": "FAB1",
+        "product_family": "普通刚性",
+        "outside_neighbor": ""
+      }
+    ],
+    "expected_error": "raw generic"
+  }
+]
