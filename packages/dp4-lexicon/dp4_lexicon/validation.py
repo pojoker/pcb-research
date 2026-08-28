@@ -10,8 +10,9 @@ from .errors import BareAbbreviationError, CellIdCollisionError, RegexCompilatio
 from .schema import LexiconEntry
 
 
-# Includes active PCB cells plus M6/M8, which remain reserved market-level words.
-RESERVED_CELL_IDS = frozenset(
+# A target must be a currently active tree cell.  M6/M8 are reserved market
+# words but are deliberately absent here; M4 remains the active resin cell.
+ACTIVE_TARGET_CELL_IDS = frozenset(
     {
         "FAB1",
         "FAB2",
@@ -20,9 +21,7 @@ RESERVED_CELL_IDS = frozenset(
         "M3",
         "M4",
         "M5",
-        "M6",
         "M7",
-        "M8",
         "M9",
         "MSK",
         "FLX",
@@ -45,12 +44,13 @@ RESERVED_CELL_IDS = frozenset(
         "EQ5",
         "EQ6",
         "EQ7",
-        # Prefix namespaces are reserved too; they are not valid target cells.
-        "M",
-        "PM",
-        "P",
-        "EQ",
     }
+)
+# Terms may not collide with active cells, inactive loss-grade words, or cell
+# namespace prefixes.  Keeping this separate from ACTIVE_TARGET_CELL_IDS is
+# what allows target M4 while still rejecting a bare lexical term named M4.
+RESERVED_TERM_TOKENS = ACTIVE_TARGET_CELL_IDS | frozenset(
+    {"M6", "M8", "M", "PM", "P", "EQ"}
 )
 SPECIAL_TARGET_CELLS = frozenset({"ANY", "OUTSIDE", "ROLE", "AXIS_D"})
 _BARE_ABBREVIATION = re.compile(r"^[A-Za-z][A-Za-z0-9./-]*$")
@@ -77,7 +77,7 @@ def validate_cell_id(cell_id: str) -> None:
     if not isinstance(cell_id, str) or not cell_id.strip():
         raise SchemaError("target_cell must be a non-empty string")
     normalized = cell_id.strip().upper()
-    if normalized not in RESERVED_CELL_IDS and normalized not in SPECIAL_TARGET_CELLS:
+    if normalized not in ACTIVE_TARGET_CELL_IDS and normalized not in SPECIAL_TARGET_CELLS:
         raise SchemaError(
             f"target_cell {cell_id!r} is not a declared cell id or special target "
             f"({', '.join(sorted(SPECIAL_TARGET_CELLS))})"
@@ -86,7 +86,7 @@ def validate_cell_id(cell_id: str) -> None:
 
 def _reserved_collision(term: str) -> str | None:
     normalized = term.strip().upper()
-    if normalized in RESERVED_CELL_IDS:
+    if normalized in RESERVED_TERM_TOKENS:
         return normalized
     return None
 

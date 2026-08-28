@@ -16,7 +16,8 @@ from .errors import (
 from .fixtures import Fixture, GoldenResult, run_golden_fixtures
 from .schema import LexiconEntry, load_lexicon, load_json_records
 from .validation import (
-    RESERVED_CELL_IDS,
+    ACTIVE_TARGET_CELL_IDS,
+    RESERVED_TERM_TOKENS,
     SPECIAL_TARGET_CELLS,
     compile_gate,
     validate_cell_id,
@@ -36,7 +37,8 @@ __all__ = [
     "LexiconError",
     "Measurement",
     "RegexCompilationError",
-    "RESERVED_CELL_IDS",
+    "ACTIVE_TARGET_CELL_IDS",
+    "RESERVED_TERM_TOKENS",
     "SPECIAL_TARGET_CELLS",
     "SchemaError",
     "compile_gate",

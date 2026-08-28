@@ -16,7 +16,7 @@ DP4 是波 1 的机械探测包：它校验候选词表、编译所有正则、�
 
 `literal` 用转义后的词形匹配；`regex` 将 `term` 本身作为正则；两者都会执行 `include_patterns`（全部满足）和 `exclude_patterns`（命中任一即排除）。`context_any` 要求至少一个 include 命中，`context_all` 要求全部命中，`context_2_of` 要求至少两个 include 命中。每一个 include/exclude 都经过 Python `re` 编译闸。
 
-裸 ASCII 缩写（例如 `SAP`、`HDI`、`BT`、`PCB`、`M6`）直接失败，不能仅靠上下文正则升级为合格词形；应改用短语。`mSAP` 是 `docs/04-词表.md` 明确允许的限定工艺词，作为唯一的当前例外。词形与 FAB1/FAB2、M1-M9、MSK、FLX、PM1-3、P1-9、EQ1-7 以及 M4/M6/M8 保留字冲突时直接失败。
+裸 ASCII 缩写（例如 `SAP`、`HDI`、`BT`、`PCB`、`M6`）直接失败，不能仅靠上下文正则升级为合格词形；应改用短语。`mSAP` 是 `docs/04-词表.md` 明确允许的限定工艺词，作为唯一的当前例外。活动 cell ID、命名空间前缀及 M6/M8 损耗俗称均属于禁止词形；target 则只允许当前 30 个活动 cell 或显式 special target。M4 因此可以作为树脂格 target，但裸词 `M4` 仍会因保留字冲突而失败。
 
 ## 用法
 

@@ -8,7 +8,7 @@ import json
 import sys
 from pathlib import Path
 
-from .adapters import fetch_draft
+from .adapters import fetch_draft, fetch_twse_listed_company_draft
 from .registry import (
     FROZEN_FIELDS,
     INCLUSION_DECISION_FIELDS,
@@ -35,9 +35,9 @@ DIFF_FIELDS = (
 
 def _validate(args: argparse.Namespace) -> int:
     frozen = load_csv(args.frozen, FROZEN_FIELDS)
-    frozen_report = validate_frozen(frozen)
-    print(report_text(frozen_report))
     decisions = load_csv(args.decisions, INCLUSION_DECISION_FIELDS)
+    frozen_report = validate_frozen(frozen, decisions)
+    print(report_text(frozen_report))
     decision_report = validate_inclusion_decisions(decisions, frozen)
     print(report_text(decision_report))
     return 0 if frozen_report.ok and decision_report.ok else 1
@@ -98,6 +98,17 @@ def _draft(args: argparse.Namespace) -> int:
     return 0
 
 
+def _twse_draft(args: argparse.Namespace) -> int:
+    rows = fetch_twse_listed_company_draft(
+        query_date=args.query_date,
+        fixture_path=args.fixture,
+        timeout_seconds=args.timeout_seconds,
+    )
+    write_csv(args.output, FROZEN_FIELDS, rows)
+    print(f"TWSE listed-company draft rows: {len(rows)}; status forced to 待核")
+    return 0
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description="PCB DP1 denominator registry")
     sub = parser.add_subparsers(dest="command", required=True)
@@ -132,6 +143,13 @@ def build_parser() -> argparse.ArgumentParser:
     draft.add_argument("--config", required=True)
     draft.add_argument("--output", required=True)
     draft.set_defaults(func=_draft)
+
+    twse_draft = sub.add_parser("fetch-twse-listed-draft")
+    twse_draft.add_argument("--query-date", required=True)
+    twse_draft.add_argument("--fixture")
+    twse_draft.add_argument("--timeout-seconds", type=float, default=20)
+    twse_draft.add_argument("--output", required=True)
+    twse_draft.set_defaults(func=_twse_draft)
     return parser
 
 

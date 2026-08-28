@@ -12,10 +12,22 @@
     "expected_matches": ["覆铜板"]
   },
   {
+    "fixture_id": "ccl-negated-boundary",
+    "kind": "negative",
+    "text": "该产品并非覆铜板，而是建筑装饰用复合板。",
+    "expected_matches": []
+  },
+  {
     "fixture_id": "pp-positive",
     "kind": "positive",
     "text": "板厂采购半固化片用于叠板压合。",
     "expected_matches": ["半固化片"]
+  },
+  {
+    "fixture_id": "pp-composite-negative",
+    "kind": "negative",
+    "text": "碳纤维半固化片用于风电叶片和体育器材。",
+    "expected_matches": []
   },
   {
     "fixture_id": "foil-positive",
@@ -94,6 +106,12 @@
     "kind": "positive",
     "text": "PI膜是挠性软板的关键材料。",
     "expected_matches": ["PI膜"]
+  },
+  {
+    "fixture_id": "pi-display-negative",
+    "kind": "negative",
+    "text": "聚酰亚胺PI膜被用作柔性显示基板。",
+    "expected_matches": []
   },
   {
     "fixture_id": "aoi-positive",

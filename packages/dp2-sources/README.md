@@ -17,10 +17,13 @@ PCB 波 1 的离线优先来源登记器。它只保存来源、可达性和口�
 在本目录运行：
 
 ```sh
+python3 selftest.py
 python3 -m unittest discover -s tests -v
 python3 -m dp2_sources detect-echoes fixtures/prismark_three_layers.json /tmp/dp2-echoes.json
 python3 -m dp2_sources probe-t1 fixtures/t1_probe_sources.csv /tmp/dp2-probes.json
 ```
+
+`selftest.py` 是独立离线入口，会通过公开 CLI 依次覆盖来源台账、T1 探测、8534 口径与数字回声四个闸。所有 CSV 输入必须与各自 canonical schema 的字段和顺序完全一致；缺列、多列、乱序或额外数据单元均 fail closed。JSON 回声输入要求字段集合精确，但不把对象字段顺序误当作语义。
 
 最后一条默认**不发网络请求**，而是为每行生成日期、`network_disabled` 错误和 `待人工裁决` 的审计记录。只有用户明确决定进行网络观察时才可以加开关：
 

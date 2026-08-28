@@ -3,21 +3,17 @@
 from __future__ import annotations
 
 import argparse
-import csv
-import json
 from dataclasses import asdict
+import json
 from pathlib import Path
+import sys
 from typing import Sequence
 
-from .accessibility import probe_t1_sources
-from .customs8534 import check_8534_freeze
-from .echoes import EchoMention, cluster_numeric_echoes
-from .schema import validate_ledger_record
-
-
-def _read_csv(path: Path) -> list[dict[str, str]]:
-    with path.open(newline="", encoding="utf-8-sig") as handle:
-        return list(csv.DictReader(handle))
+from .accessibility import T1_PROBE_FIELDS, probe_t1_sources
+from .customs8534 import FREEZE_TEMPLATE_FIELDS, check_8534_freeze
+from .echoes import ECHO_MENTION_FIELDS, EchoMention, cluster_numeric_echoes
+from .input_schema import InputSchemaError, load_json, parse_exact_json_records, read_csv_records
+from .schema import LEDGER_FIELDS, validate_ledger_record
 
 
 def _write_json(path: Path, payload: object) -> None:
@@ -26,7 +22,7 @@ def _write_json(path: Path, payload: object) -> None:
 
 def _validate_ledger(args: argparse.Namespace) -> int:
     results = []
-    for index, row in enumerate(_read_csv(args.input), start=2):
+    for index, row in enumerate(read_csv_records(args.input, LEDGER_FIELDS, "source ledger"), start=2):
         result = validate_ledger_record(row)
         results.append({"line": index, "valid": result.valid, "errors": result.errors, "warnings": result.warnings})
     _write_json(args.output, results)
@@ -34,24 +30,25 @@ def _validate_ledger(args: argparse.Namespace) -> int:
 
 
 def _probe_t1(args: argparse.Namespace) -> int:
-    results = probe_t1_sources(_read_csv(args.input), enable_network=args.enable_network, timeout_seconds=args.timeout)
+    records = read_csv_records(args.input, T1_PROBE_FIELDS, "T1 probe")
+    results = probe_t1_sources(records, enable_network=args.enable_network, timeout_seconds=args.timeout)
     _write_json(args.output, [result.as_dict() for result in results])
     return 0
 
 
 def _check_8534(args: argparse.Namespace) -> int:
-    rows = _read_csv(args.input)
+    rows = read_csv_records(args.input, FREEZE_TEMPLATE_FIELDS, "8534 freeze")
     if len(rows) != 1:
-        raise SystemExit("8534 template must contain exactly one scope row")
+        raise InputSchemaError("8534 freeze CSV must contain exactly one scope row after its header.")
     result = check_8534_freeze(rows[0])
     _write_json(args.output, asdict(result))
     return 0 if not result.missing_fields and not result.errors else 1
 
 
 def _echoes(args: argparse.Namespace) -> int:
-    with args.input.open(encoding="utf-8") as handle:
-        payload = json.load(handle)
-    mentions = [EchoMention(**row) for row in payload]
+    payload = load_json(args.input, "detect-echoes input")
+    records = parse_exact_json_records(payload, ECHO_MENTION_FIELDS, "detect-echoes input")
+    mentions = [EchoMention(**row) for row in records]
     _write_json(args.output, [asdict(cluster) for cluster in cluster_numeric_echoes(mentions)])
     return 0
 
@@ -86,7 +83,11 @@ def build_parser() -> argparse.ArgumentParser:
 
 def main(argv: Sequence[str] | None = None) -> int:
     args = build_parser().parse_args(argv)
-    return int(args.handler(args))
+    try:
+        return int(args.handler(args))
+    except InputSchemaError as exc:
+        print(f"input error: {exc}", file=sys.stderr)
+        return 2
 
 
 if __name__ == "__main__":

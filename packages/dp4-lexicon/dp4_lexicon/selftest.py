@@ -5,10 +5,10 @@ from __future__ import annotations
 from pathlib import Path
 
 from .corpus import CorpusDocument, CorpusScanner
-from .errors import BareAbbreviationError, CellIdCollisionError, RegexCompilationError
+from .errors import BareAbbreviationError, CellIdCollisionError, RegexCompilationError, SchemaError
 from .fixtures import load_fixtures, run_golden_fixtures
 from .schema import LexiconEntry, load_lexicon
-from .validation import compile_entry, compile_gate
+from .validation import compile_entry, compile_gate, validate_cell_id
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -26,6 +26,7 @@ def run(*, verbose: bool = True) -> int:
     fixtures = load_fixtures(str(FIXTURES))
     fixture_index = {fixture.fixture_id: fixture for fixture in fixtures}
     compiled = compile_gate(entries)
+    _assert(all(entry.exclude_patterns for entry in entries), "every candidate needs an exclusion regex")
     results = run_golden_fixtures(compiled, fixtures)
     failures = [result for result in results if not result.passed]
     _assert(not failures, f"golden fixture failures: {[item.as_dict() for item in failures]}")
@@ -74,6 +75,14 @@ def run(*, verbose: bool = True) -> int:
         pass
     else:
         raise AssertionError("reserved M6 was accepted")
+    validate_cell_id("M4")
+    for inactive in ("M6", "M8"):
+        try:
+            validate_cell_id(inactive)
+        except SchemaError:
+            pass
+        else:
+            raise AssertionError(f"inactive target {inactive} was accepted")
     try:
         compile_entry(
             LexiconEntry(

@@ -1,6 +1,22 @@
 # Wave 1（DP1 / DP2 / DP4）严格依赖审计
 
-**结论：不允许进入 Wave 2。**
+**当前结论（修复复审）：Wave 1 机械缺口已关闭；Wave 2 仍等待 G1–G6 人闸，不得由开发包自行启动。**
+
+## 修复复审
+
+初次审计发现的问题已在同日后续实现中复现并修复，主代理重新运行全部包测试与原始反例：
+
+| 开发包 | 修复后裁决 | 复审证据 | 剩余边界 |
+|---|---|---|---|
+| DP1 分母登记器 | **pass** | `14/14` unittest 与独立 selftest 通过；无人工 `manual_include/include/已裁决` 时 `已冻结` 行 fail closed；机械快照不能由 CLI 标记冻结；新增 TWSE 官方上市公司资料适配器及离线 fixture。2026-08-28 实际访问官方 endpoint 得到 1,095 行，全部为 `观察/待核`。 | TWSE 上市事实和产业别仍不构成 PCB 分母纳入；L2 迁移等待 G1 人闸。 |
+| DP2 来源登记器 | **pass** | `19/19` unittest 与独立离线 selftest 通过；ledger、T1 probe、8534 的缺列/多列/乱序/额外字段均 fail closed；回声 JSON 拒绝未知字段但不误判对象字段顺序。 | T1 承重与 8534 冻结继续由人工裁决。 |
+| DP4 词表实测器 | **mechanical pass / gate pending** | `6/6` unittest、20 个 golden fixtures 与 selftest 通过；M6/M8 target 被拒绝，M4 作为活动树脂格 target 暂时保留；10 个候选均有可编译排除正则。 | `docs/04-词表.md` 对 M4 的活动格/损耗俗称冲突仍需 G4-A 或 G4-B 人闸，再同步 canonical 文本。 |
+
+原审计反例复跑结果：DP1 无裁决冻结返回 `valid=False`；DP4 为 `M4 accepted`、`M6/M8 SchemaError`；空 `exclude_patterns` 条目为 `[]`；DP2 独立 `selftest.py` 存在并通过。
+
+因此，下文保留为初次审计记录和回归依据；其中“fail/indeterminate”是修复前状态。当前不进入 Wave 2 的原因已收敛为 G1–G6 研究契约尚未由用户冻结，而不是上述机械缺口仍存在。
+
+## 初次审计结论（修复前）
 
 | 开发包 | 裁决 | Wave 2 放行 | 阻断原因 |
 |---|---|---|---|
@@ -161,11 +177,11 @@ PYTHONPATH=packages/dp4-lexicon python3 -m dp4_lexicon measure \
 
 将 M6/M8 从合法 target 集合移除并增加 target 反例；由 G4 人闸裁决 M4 是保留为活动树脂格还是改名，同时明确损耗俗称的词表表达；为每个候选补上可编译排除正则及各自负/边界 fixture，或由判定闸明确修订 `docs/04-词表.md` 的“每词必有排除正则”规则。完成后重新运行 selftest、unittest 和 measure。
 
-## 最终放行清单
+## 放行清单（修复复审状态）
 
-- [ ] DP1：冻结状态与人工裁决记录强绑定；真实来源适配器/范围降级完成。
-- [ ] DP2：独立 selftest 与严格 CSV 表头闸完成。
-- [ ] DP4：M6/M8 target 漏洞封堵；M4 命名冲突经 G4 人闸解决；三个空排除词补齐反例。
-- [ ] 三包重跑测试、selftest 和所列无落盘反例，审计复核为 pass。
+- [x] DP1：冻结状态与人工裁决记录强绑定；TWSE 真实来源适配器及待核边界完成。
+- [x] DP2：独立 selftest 与严格 CSV 表头闸完成。
+- [ ] DP4：M6/M8 target 漏洞和三个空排除词已修复；M4 命名冲突仍待 G4 人闸。
+- [x] 三包重跑测试、selftest 和所列无落盘反例；机械实现复核通过。
 
-在以上清单全部完成前，按 `CLAUDE.md` 第 3 条和不变量 ⑲，Wave 2 的 DP3/DP5/DP6/DP7 不应启动。
+在 G1–G6（尤其 G4 的 M4 语义）完成用户裁决前，按 `CLAUDE.md` 第 3 条和不变量 ⑲，Wave 2 的 DP3/DP5/DP6/DP7 不应启动。

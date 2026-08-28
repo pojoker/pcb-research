@@ -13,6 +13,9 @@ from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
 
 
+T1_PROBE_FIELDS = ("origin_source_id", "carrier_url")
+
+
 @dataclass(frozen=True)
 class ProbeRecord:
     origin_source_id: str
@@ -87,3 +90,9 @@ def probe_t1_sources(
                 ProbeRecord(source_id, url, probe_date, True, False, None, type(exc).__name__, str(exc))
             )
     return results
+
+
+def t1_probe_csv_header() -> tuple[str, ...]:
+    """Return the exact ordered schema for the probe input CSV."""
+
+    return T1_PROBE_FIELDS

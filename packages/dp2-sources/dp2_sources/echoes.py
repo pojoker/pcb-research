@@ -14,6 +14,16 @@ from typing import Iterable
 from urllib.parse import urlparse
 
 
+ECHO_MENTION_FIELDS = (
+    "mention_id",
+    "carrier_url",
+    "origin_source_id",
+    "independence_group",
+    "claim_key",
+    "text",
+)
+
+
 # Put the comma-grouped form first and require a complete token; otherwise the
 # first alternative can truncate an ungrouped ``1234`` to ``123``.
 NUMBER_RE = re.compile(r"(?<![\w.])[-+]?(?:\d{1,3}(?:,\d{3})+|\d+)(?:\.\d+)?")

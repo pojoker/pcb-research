@@ -4,10 +4,10 @@ import unittest
 from pathlib import Path
 
 from dp4_lexicon.corpus import CorpusDocument, CorpusScanner
-from dp4_lexicon.errors import BareAbbreviationError, CellIdCollisionError, RegexCompilationError
+from dp4_lexicon.errors import BareAbbreviationError, CellIdCollisionError, RegexCompilationError, SchemaError
 from dp4_lexicon.fixtures import load_fixtures, run_golden_fixtures
 from dp4_lexicon.schema import LexiconEntry, load_lexicon
-from dp4_lexicon.validation import compile_entry, compile_gate
+from dp4_lexicon.validation import compile_entry, compile_gate, validate_cell_id
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -42,6 +42,18 @@ class DP4LexiconTest(unittest.TestCase):
             compile_entry(LexiconEntry("M6", "literal", (), (), "AXIS_D", "sensitive", ("x",)))
         with self.assertRaises(RegexCompilationError):
             compile_entry(LexiconEntry("坏正则", "literal", (), ("[",), "M1", "sensitive", ("x",)))
+
+    def test_only_active_cells_can_be_targets_while_m4_remains_an_active_cell(self):
+        validate_cell_id("M4")
+        for inactive in ("M6", "M8"):
+            with self.subTest(inactive=inactive):
+                with self.assertRaisesRegex(SchemaError, "not a declared cell id"):
+                    validate_cell_id(inactive)
+
+    def test_every_candidate_has_a_compilable_exclusion_rule(self):
+        entries = load_lexicon(ROOT / "data/candidate_lexicon.json")
+        self.assertEqual([entry.term for entry in entries if not entry.exclude_patterns], [])
+        compile_gate(entries)
 
     def test_four_key_measurement_and_collision_report(self):
         compiled = compile_gate(load_lexicon(ROOT / "data/candidate_lexicon.json"))

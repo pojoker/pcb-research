@@ -3,10 +3,10 @@
     "term": "覆铜板",
     "match_mode": "literal",
     "include_patterns": [],
-    "exclude_patterns": [],
+    "exclude_patterns": ["非覆铜板|不属于覆铜板|并非覆铜板"],
     "target_cell": "M1",
     "case_policy": "sensitive",
-    "test_fixture_ids": ["ccl-positive", "ccl-double-count-boundary"]
+    "test_fixture_ids": ["ccl-positive", "ccl-double-count-boundary", "ccl-negated-boundary"]
   },
   {
     "term": "电子电路铜箔",
@@ -21,10 +21,10 @@
     "term": "半固化片",
     "match_mode": "literal",
     "include_patterns": [],
-    "exclude_patterns": [],
+    "exclude_patterns": ["碳纤维|风电叶片|航空复材|体育器材"],
     "target_cell": "M2",
     "case_policy": "sensitive",
-    "test_fixture_ids": ["pp-positive"]
+    "test_fixture_ids": ["pp-positive", "pp-composite-negative"]
   },
   {
     "term": "PCB裸板",
@@ -75,10 +75,10 @@
     "term": "PI膜",
     "match_mode": "context_any",
     "include_patterns": ["软板|聚酰亚胺|挠性"],
-    "exclude_patterns": [],
+    "exclude_patterns": ["柔性显示|显示基板|盖板膜"],
     "target_cell": "FLX",
     "case_policy": "sensitive",
-    "test_fixture_ids": ["pi-positive"]
+    "test_fixture_ids": ["pi-positive", "pi-display-negative"]
   },
   {
     "term": "AOI检测",

@@ -238,7 +238,62 @@ def find_duplicate_candidates(rows: Sequence[Mapping[str, str]]) -> list[dict[st
     return candidates
 
 
-def validate_frozen(rows: Sequence[Mapping[str, str]]) -> ValidationReport:
+def _matching_frozen_decision_errors(
+    frozen: Mapping[str, str],
+    decisions: Sequence[Mapping[str, str]],
+    *,
+    row_number: int,
+) -> list[str]:
+    """Return fail-closed errors for a row represented as ``已冻结``.
+
+    A mechanical record cannot freeze itself.  The matching manual decision is
+    the audit authority; the frozen row supplies the source and duplicate-key
+    values that decision must preserve.
+    """
+
+    entity_id = frozen.get("entity_id", "-")
+    candidates = [
+        decision
+        for decision in decisions
+        if decision.get("entity_id") == entity_id
+        and decision.get("decision_type") == "manual_include"
+        and decision.get("action") == "include"
+        and decision.get("decision_status") == "已裁决"
+    ]
+    if not candidates:
+        return [
+            f"row {row_number}: record_status=已冻结 requires a matching "
+            "manual_include/include/已裁决 decision"
+        ]
+
+    errors: list[str] = []
+    for decision in candidates:
+        decision_id = decision.get("decision_id", "-")
+        prefix = f"row {row_number}: frozen decision {decision_id}"
+        candidate_errors: list[str] = []
+        if decision.get("decision_owner") in {"", "-", "待定"}:
+            candidate_errors.append(f"{prefix}: decision_owner must name the human reviewer")
+        if not _valid_date(decision.get("decision_date", "")):
+            candidate_errors.append(f"{prefix}: decision_date must be an ISO review date")
+        evidence_anchor = decision.get("evidence_anchor", "")
+        if evidence_anchor in {"", "-"} or "://" not in evidence_anchor:
+            candidate_errors.append(f"{prefix}: evidence_anchor must be a traceable locator")
+        source_url = decision.get("source_url", "")
+        if not _valid_url(source_url) or source_url != frozen.get("source_url"):
+            candidate_errors.append(f"{prefix}: source_url must be valid and match the frozen row")
+        if decision.get("double_count_key") != frozen.get("double_count_key"):
+            candidate_errors.append(f"{prefix}: double_count_key must match the frozen row")
+        if not candidate_errors:
+            return []
+        errors.extend(candidate_errors)
+
+    return errors
+
+
+def validate_frozen(
+    rows: Sequence[Mapping[str, str]],
+    decisions: Sequence[Mapping[str, str]] = (),
+) -> ValidationReport:
     report = ValidationReport()
     _check_schema(rows, FROZEN_FIELDS, report)
     seen_record_ids: set[str] = set()
@@ -262,6 +317,14 @@ def validate_frozen(rows: Sequence[Mapping[str, str]]) -> ValidationReport:
             report.error(f"row {row_number}: product_scope is required")
         if not row.get("notes") or row.get("notes") == "-":
             report.error(f"row {row_number}: notes must state pending/freeze context")
+        if row.get("record_status") == "已冻结":
+            report.errors.extend(
+                _matching_frozen_decision_errors(
+                    row,
+                    decisions,
+                    row_number=row_number,
+                )
+            )
 
     candidates = find_duplicate_candidates(rows)
     for candidate in candidates:
@@ -315,6 +378,15 @@ def validate_inclusion_decisions(
         if frozen and row.get("double_count_key") != frozen.get("double_count_key"):
             report.error(f"row {row_number}: decision double_count_key disagrees with frozen row")
     if frozen_rows:
+        for frozen_row_number, frozen in enumerate(frozen_rows, start=2):
+            if frozen.get("record_status") == "已冻结":
+                report.errors.extend(
+                    _matching_frozen_decision_errors(
+                        frozen,
+                        rows,
+                        row_number=frozen_row_number,
+                    )
+                )
         duplicate_candidates = find_duplicate_candidates(frozen_rows)
         triaged_pairs = {
             (row.get("double_count_key"), row.get("entity_id"))
@@ -362,8 +434,8 @@ def build_snapshot_metadata(
         raise ValueError("query_date must be ISO YYYY-MM-DD")
     if not _valid_url(source_url):
         raise ValueError("source_url must be an http(s) URL")
-    if freeze_status not in RECORD_STATUSES:
-        raise ValueError(f"invalid freeze_status: {freeze_status}")
+    if freeze_status != "待核":
+        raise ValueError("mechanical snapshots remain 待核; --freeze-status cannot freeze a snapshot")
     canonical = "\n".join(_canonical_rows(rows)).encode("utf-8")
     digest = hashlib.sha256(canonical).hexdigest()
     layer_counts = Counter(row.get("layer", "-") for row in rows)
@@ -378,7 +450,7 @@ def build_snapshot_metadata(
         "input_sha256": digest,
         "record_count": len(rows),
         "layer_counts": dict(sorted(layer_counts.items())),
-        "freeze_status": freeze_status,
+        "freeze_status": "待核",
         "verification_note": "机械快照元数据；来源结论与纳入裁决仍待核。",
     }
 

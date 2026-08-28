@@ -7,7 +7,7 @@ DP1 是波 1 的机械登记包：登记候选分母、校验 CSV schema、生�
 - `fixtures/_frozen.csv`：待核候选分母。每行显式包含 `issuer` / `legal_entity` / `plant` / `group` 四类 ID 字段；不用的字段写 `-`。
 - `fixtures/inclusion_decision.csv`：三组母子/合并口径重复候选的 triage 记录。
 - `dp1_denominator/registry.py`：schema、身份/层级/来源/日期校验，重复候选识别，快照元数据和 diff。
-- `dp1_denominator/adapters.py`：配置驱动的 JSON/HTTP 草稿适配器。输出状态强制为 `待核`。
+- `dp1_denominator/adapters.py`：配置驱动草稿适配器，以及固定的 TWSE 官方上市公司基本资料适配器。所有输出状态强制为 `待核`。
 - `tests/`、`selftest.py`：离线 unittest 与反例。
 
 ## 离线自测
@@ -18,7 +18,7 @@ DP1 是波 1 的机械登记包：登记候选分母、校验 CSV schema、生�
 python packages/dp1-denominator/selftest.py
 ```
 
-预期为 8 个测试全部通过。也可以在包目录运行：
+预期为 14 个测试全部通过。也可以在包目录运行：
 
 ```bash
 cd packages/dp1-denominator
@@ -78,6 +78,28 @@ python -m dp1_denominator.cli fetch-draft \
 
 生产配置应使用真实 endpoint、字段映射和来源元数据；适配器不内置交易所或协会成员结论，HTTP 返回的数据也不会被标成 `已冻结`。
 
+TWSE 官方上市公司基本资料适配器固定使用
+`https://openapi.twse.com.tw/v1/opendata/t187ap03_L`，读取 `公司代號`、`公司名稱`、`公司簡稱`、`產業別`、`出表日期`。在线抓取：
+
+```bash
+PYTHONPATH=packages/dp1-denominator \
+python -m dp1_denominator.cli fetch-twse-listed-draft \
+  --query-date 2026-08-28 \
+  --output /tmp/twse-listed-draft.csv
+```
+
+离线复现同一映射：
+
+```bash
+PYTHONPATH=packages/dp1-denominator \
+python -m dp1_denominator.cli fetch-twse-listed-draft \
+  --query-date 2026-08-28 \
+  --fixture packages/dp1-denominator/fixtures/twse_t187ap03_L.json \
+  --output /tmp/twse-listed-draft.csv
+```
+
+该适配器只把交易所记录登记为 `观察` 层的待核 issuer 候选。`產業別` 和上市事实仅作为原始字段保留在 notes，**不**自动推定 PCB 产品范围、研究分母纳入、层级、供应关系或任何人工裁决；输出仍须经 DP1 人闸。
+
 ## 关键规则
 
 `_frozen.csv` 是严格字段集合；空值必须写 `-`。`entity_id` 必须与 `entity_type` 对应的 ID 相等，四类 ID 使用带命名空间的形式，如 `issuer:TW:4958`。层级只接受 `L1-A`、`L1-B`、`L1-C`、`L2`、`L3`、`L4`、`观察`；来源 URL 必须为 HTTP(S)，查询日为 ISO 日期。
@@ -86,3 +108,5 @@ python -m dp1_denominator.cli fetch-draft \
 若传入冻结行校验决策台账，则每个重复键下的每个主体都必须有 `duplicate_candidate` triage 行。
 
 所有 fixtures 都是 `待核`，`example.invalid` 仅用于离线测试，不能被解释为交易所、协会或披露易结论。研究范围、层级成分、混合主体拆分、双计键的最终含义仍需用户判定闸裁决。
+
+若某条登记行被写为 `已冻结`，校验必须同时收到同一 `entity_id` 的 `manual_include` / `include` / `已裁决` 人工决策；该决策的审核人、审核日期、证据锚必须可核，且 `source_url`、`double_count_key` 必须与冻结行一致。没有该裁决台账时校验 fail closed。机械快照元数据始终为 `待核`，`--freeze-status 已冻结` 会被拒绝。
