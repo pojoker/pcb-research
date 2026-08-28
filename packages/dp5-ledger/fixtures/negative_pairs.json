@@ -1,0 +1,5 @@
+[
+  {"fixture_id": "parent_child_double_count", "expected_error": "prohibited additive subject pair hit in either direction", "mutations": [{"op": "set", "path": "aggregation_requests.0.metric_ids", "value": ["metric_parent", "metric_child"]}, {"op": "set", "path": "aggregation_requests.0.output_channel", "value": "disclosure"}, {"op": "set", "path": "aggregation_requests.0.metric_type", "value": "revenue"}]},
+  {"fixture_id": "pair_without_adjudicator", "expected_error": "missing fields: adjudicator", "mutations": [{"op": "delete", "path": "prohibited_additive_subject_pairs.0.adjudicator"}]},
+  {"fixture_id": "duplicate_subject_mapping", "expected_error": "duplicate subject_id", "mutations": [{"op": "append", "path": "subject_mappings", "value": {"subject_id": "plant_cn", "subject_type": "plant", "issuer_id": "issuer_tw", "legal_entity_id": "legal_cn", "plant_id": "plant_cn", "group_id": "group_all"}}]}
+]

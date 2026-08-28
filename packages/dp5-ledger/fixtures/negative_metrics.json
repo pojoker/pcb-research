@@ -1,0 +1,16 @@
+[
+  {"fixture_id": "pcba_revenue_on_fab", "expected_error": "outside product_family", "mutations": [{"op": "set", "path": "metrics.1.product_family", "value": "PCBA"}]},
+  {"fixture_id": "missing_product_family", "expected_error": "missing fields: product_family", "mutations": [{"op": "delete", "path": "metrics.0.product_family"}]},
+  {"fixture_id": "fab_mixed_aggregation", "expected_error": "FAB1/FAB2 production, revenue, and area must not be aggregated", "mutations": [{"op": "set", "path": "aggregation_requests.0.metric_ids", "value": ["metric_physical", "metric_fab2"]}]},
+  {"fixture_id": "ccl_contains_foil_double_count", "expected_error": "CCL (M1, contains foil) and independent copper foil (M3) must not be aggregated", "mutations": [{"op": "set", "path": "aggregation_requests.0.metric_ids", "value": ["metric_ccl", "metric_foil"]}]},
+  {"fixture_id": "physical_disclosure_mixed", "expected_error": "physical and disclosure outputs must not be mixed", "mutations": [{"op": "set", "path": "aggregation_requests.0.metric_ids", "value": ["metric_physical", "metric_disclosure"]}]},
+  {"fixture_id": "taiwan_parent_china_plant_cross_output", "expected_error": "physical and disclosure outputs must not be mixed", "mutations": [{"op": "set", "path": "aggregation_requests.0.metric_ids", "value": ["metric_parent", "metric_physical"]}]},
+  {"fixture_id": "outsource_edge_self_owned", "expected_error": "outsourcing/manufacturing edge must not generate self-owned output", "mutations": [{"op": "set", "path": "metrics.2.ownership_basis", "value": "self_owned"}]},
+  {"fixture_id": "mixed_subject_no_split", "expected_error": "mixed business requires split_evidence_id", "mutations": [{"op": "set", "path": "metrics.0.mixed_business", "value": true}]},
+  {"fixture_id": "non_mixed_fake_split", "expected_error": "non-mixed record must not claim split evidence", "mutations": [{"op": "set", "path": "metrics.0.split_evidence_id", "value": "invented_split"}]},
+  {"fixture_id": "mixed_subject_no_business_scope", "expected_error": "business_scope must be a non-empty string", "mutations": [{"op": "set", "path": "metrics.0.business_scope", "value": ""}]},
+  {"fixture_id": "mixed_subject_no_metric_scope", "expected_error": "metric_scope must be a non-empty string", "mutations": [{"op": "set", "path": "metrics.0.metric_scope", "value": ""}]},
+  {"fixture_id": "floating_edge", "expected_error": "derivation manufacturing edge 'edge_missing' is not present", "mutations": [{"op": "set", "path": "metrics.2.derivation_source_id", "value": "edge_missing"}]},
+  {"fixture_id": "period_reversed", "expected_error": "period_start must not be later than period_end", "mutations": [{"op": "set", "path": "metrics.0.period_start", "value": "2026-12-31"}, {"op": "set", "path": "metrics.0.period_end", "value": "2026-01-01"}]},
+  {"fixture_id": "unknown_enum", "expected_error": "metric_type must be one of", "mutations": [{"op": "set", "path": "metrics.0.metric_type", "value": "unknown_metric"}]}
+]

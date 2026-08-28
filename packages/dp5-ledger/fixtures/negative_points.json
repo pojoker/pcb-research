@@ -1,0 +1,6 @@
+[
+  {"fixture_id": "outsourcing_role_self_owned", "expected_error": "process_outsourcing point must not carry self-owned output inference", "mutations": [{"op": "set", "path": "points.1.self_owned_output_inference", "value": true}]},
+  {"fixture_id": "point_missing_product_family", "expected_error": "missing fields: product_family", "mutations": [{"op": "delete", "path": "points.0.product_family"}]},
+  {"fixture_id": "point_subject_mismatch", "expected_error": "evidence_subject_id must equal subject_id", "mutations": [{"op": "set", "path": "points.0.evidence_subject_id", "value": "vendor_ext"}]},
+  {"fixture_id": "missing_mapping_without_reason", "expected_error": "missing mapped IDs require missing_id_reason", "mutations": [{"op": "set", "path": "subject_mappings.0.plant_id", "value": ""}]}
+]

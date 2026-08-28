@@ -1,0 +1,5 @@
+[
+  {"fixture_id": "outsourcing_five_tuple_missing", "expected_error": "missing fields: seller_of_record", "mutations": [{"op": "delete", "path": "manufacturing_edges.0.seller_of_record"}]},
+  {"fixture_id": "edge_time_reversed", "expected_error": "relationship_start must not be later than relationship_end", "mutations": [{"op": "set", "path": "manufacturing_edges.0.relationship_start", "value": "2026-12-31"}, {"op": "set", "path": "manufacturing_edges.0.relationship_end", "value": "2026-01-01"}]},
+  {"fixture_id": "edge_actor_unknown", "expected_error": "process_operator 'unknown_actor' is not in subject_mappings", "mutations": [{"op": "set", "path": "manufacturing_edges.0.process_operator", "value": "unknown_actor"}]}
+]
