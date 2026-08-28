@@ -1,0 +1,26 @@
+{
+  "schema_version": "dp6.tolerance-adr.v1",
+  "id": "ADR-TOL-TEST-001",
+  "status": "approved",
+  "tolerance": 0.1,
+  "unit": "square_meter",
+  "metric_type": "actual_production",
+  "period_type": "quarter",
+  "scope": {
+    "subject_id": "S1",
+    "plant_id": "P1",
+    "product_family": "普通刚性",
+    "fab_cell": "FAB1",
+    "metric_type": "actual_production",
+    "unit": "square_meter",
+    "period_type": "quarter",
+    "period": "2026Q2",
+    "currency": "CNY",
+    "consolidation_basis": "standalone"
+  },
+  "decided_by": "fixture-human-reviewer",
+  "decision_date": "2026-08-28",
+  "evidence_anchor": "fixture://approved-tolerance-001",
+  "effective_from": "2026-01-01",
+  "effective_to": null
+}

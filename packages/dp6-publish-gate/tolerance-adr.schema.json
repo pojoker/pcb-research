@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/dp6.tolerance-adr.v1.schema.json",
+  "type": "object", "additionalProperties": false,
+  "required": ["schema_version", "id", "status", "tolerance", "unit", "metric_type", "period_type", "scope", "decided_by", "decision_date", "evidence_anchor", "effective_from", "effective_to"],
+  "properties": {
+    "schema_version": {"const": "dp6.tolerance-adr.v1"}, "id": {"type": "string", "minLength": 1},
+    "status": {"enum": ["approved", "unapproved", "pending", "rejected"]}, "tolerance": {"type": "number", "minimum": 0},
+    "unit": {"type": "string", "minLength": 1}, "metric_type": {"type": "string", "minLength": 1},
+    "period_type": {"enum": ["month", "quarter", "half_year", "year", "custom"]},
+    "scope": {"type": "object", "additionalProperties": false, "required": ["subject_id", "plant_id", "product_family", "fab_cell", "metric_type", "unit", "period_type", "period", "currency", "consolidation_basis"], "properties": {"subject_id": {"type": "string", "minLength": 1}, "plant_id": {"type": "string", "minLength": 1}, "product_family": {"type": "string", "minLength": 1}, "fab_cell": {"type": "string", "minLength": 1}, "metric_type": {"type": "string", "minLength": 1}, "unit": {"type": "string", "minLength": 1}, "period_type": {"enum": ["month", "quarter", "half_year", "year", "custom"]}, "period": {"type": "string", "minLength": 1}, "currency": {"enum": ["CNY", "USD", "TWD", "HKD", "JPY", "EUR", "NA"]}, "consolidation_basis": {"type": "string", "minLength": 1}}},
+    "decided_by": {"type": "string", "minLength": 1}, "decision_date": {"type": "string", "format": "date"},
+    "evidence_anchor": {"type": "string", "minLength": 1}, "effective_from": {"type": "string", "format": "date"}, "effective_to": {"type": ["string", "null"], "format": "date"}
+  }
+}

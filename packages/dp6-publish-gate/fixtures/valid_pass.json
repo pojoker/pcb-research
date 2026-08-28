@@ -1,0 +1,30 @@
+{
+  "schema_version": "dp6.publish-gate.input.v1",
+  "rows": [
+    {
+      "id": "Q-PASS-001",
+      "kind": "quantitative_inference",
+      "subject_id": "S1",
+      "plant_id": "P1",
+      "product_family": "普通刚性",
+      "fab_cell": "FAB1",
+      "period": "2026Q2",
+      "period_type": "quarter",
+      "metric_type": "actual_production",
+      "value": 950,
+      "unit": "square_meter",
+      "currency": "CNY",
+      "consolidation_basis": "standalone",
+      "derivation_formula": "revenue / unit_price",
+      "revenue_input": {"value": 95000, "unit": "CNY", "currency": "CNY", "anchor": "fixture://revenue-001"},
+      "unit_price_input": {"value": 100, "unit": "CNY/square_meter", "currency": "CNY", "anchor": "fixture://price-001"},
+      "capacity_ceiling": {"value": 1000, "unit": "square_meter", "period_type": "quarter", "anchor_type": "production_sales_table", "anchor": "fixture://production-table-001", "human_verified": true},
+      "customs_applicability": {"status": "not_applicable", "scope": "not_applicable", "anchor": "not_applicable"},
+      "evidence_grade": "C",
+      "retrieval_date": "2026-08-28",
+      "scenario": false,
+      "comparison": {"upper_bound_value": 1000, "upper_bound_unit": "square_meter", "upper_bound_period": "2026Q2", "upper_bound_period_type": "quarter", "upper_bound_currency": "CNY", "upper_bound_consolidation_basis": "standalone", "subject_id": "S1", "plant_id": "P1", "product_family": "普通刚性", "fab_cell": "FAB1", "metric_type": "actual_production", "tolerance_adr_id": "ADR-TOL-TEST-001"},
+      "recalibration": {"actual_value": null, "actual_unit": null, "actual_period": null, "error": null, "error_formula": null, "date": null}
+    }
+  ]
+}

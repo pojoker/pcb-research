@@ -1,0 +1,92 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/dp6.publish-gate.v1.schema.json",
+  "title": "DP6 publish gate input",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "rows"],
+  "properties": {
+    "schema_version": {"const": "dp6.publish-gate.input.v1"},
+    "rows": {
+      "type": "array",
+      "items": {"oneOf": [{"$ref": "#/$defs/quantitative"}, {"$ref": "#/$defs/customs"}]}
+    }
+  },
+  "$defs": {
+    "nonEmpty": {"type": "string", "minLength": 1},
+    "finite": {"type": "number"},
+    "periodType": {"enum": ["month", "quarter", "half_year", "year", "custom"]},
+    "currency": {"enum": ["CNY", "USD", "TWD", "HKD", "JPY", "EUR", "NA"]},
+    "input": {
+      "type": "object", "additionalProperties": false,
+      "required": ["value", "unit", "currency", "anchor"],
+      "properties": {
+        "value": {"$ref": "#/$defs/finite"}, "unit": {"$ref": "#/$defs/nonEmpty"},
+        "currency": {"$ref": "#/$defs/nonEmpty"}, "anchor": {"$ref": "#/$defs/nonEmpty"}
+      }
+    },
+    "capacity": {
+      "type": "object", "additionalProperties": false,
+      "required": ["value", "unit", "period_type", "anchor_type", "anchor", "human_verified"],
+      "properties": {
+        "value": {"$ref": "#/$defs/finite"}, "unit": {"$ref": "#/$defs/nonEmpty"},
+        "period_type": {"$ref": "#/$defs/periodType"},
+        "anchor_type": {"enum": ["production_sales_table", "built_capacity_self_disclosure", "approval_capacity"]},
+        "anchor": {"$ref": "#/$defs/nonEmpty"}, "human_verified": {"type": "boolean"}
+      }
+    },
+    "recalibration": {
+      "type": "object", "additionalProperties": false,
+      "required": ["actual_value", "actual_unit", "actual_period", "error", "error_formula", "date"],
+      "properties": {
+        "actual_value": {"type": ["number", "null"]}, "actual_unit": {"type": ["string", "null"]},
+        "actual_period": {"type": ["string", "null"]}, "error": {"type": ["number", "null"]},
+        "error_formula": {"type": ["string", "null"]}, "date": {"type": ["string", "null"]}
+      }
+    },
+    "comparison": {
+      "type": "object", "additionalProperties": false,
+      "required": ["upper_bound_value", "upper_bound_unit", "upper_bound_period", "upper_bound_period_type", "upper_bound_currency", "upper_bound_consolidation_basis", "subject_id", "plant_id", "product_family", "fab_cell", "metric_type", "tolerance_adr_id"],
+      "properties": {
+        "upper_bound_value": {"$ref": "#/$defs/finite"}, "upper_bound_unit": {"$ref": "#/$defs/nonEmpty"},
+        "upper_bound_period": {"$ref": "#/$defs/nonEmpty"}, "upper_bound_period_type": {"$ref": "#/$defs/periodType"},
+        "upper_bound_currency": {"$ref": "#/$defs/currency"}, "upper_bound_consolidation_basis": {"$ref": "#/$defs/nonEmpty"},
+        "subject_id": {"$ref": "#/$defs/nonEmpty"}, "plant_id": {"$ref": "#/$defs/nonEmpty"},
+        "product_family": {"$ref": "#/$defs/nonEmpty"}, "fab_cell": {"$ref": "#/$defs/nonEmpty"},
+        "metric_type": {"$ref": "#/$defs/nonEmpty"}, "tolerance_adr_id": {"$ref": "#/$defs/nonEmpty"}
+      }
+    },
+    "quantitative": {
+      "type": "object", "additionalProperties": false,
+      "required": ["id", "kind", "subject_id", "plant_id", "product_family", "fab_cell", "period", "period_type", "metric_type", "value", "unit", "currency", "consolidation_basis", "derivation_formula", "revenue_input", "unit_price_input", "capacity_ceiling", "customs_applicability", "evidence_grade", "retrieval_date", "scenario", "comparison", "recalibration"],
+      "properties": {
+        "id": {"$ref": "#/$defs/nonEmpty"}, "kind": {"const": "quantitative_inference"},
+        "subject_id": {"$ref": "#/$defs/nonEmpty"}, "plant_id": {"$ref": "#/$defs/nonEmpty"},
+        "product_family": {"$ref": "#/$defs/nonEmpty"}, "fab_cell": {"$ref": "#/$defs/nonEmpty"},
+        "period": {"$ref": "#/$defs/nonEmpty"}, "period_type": {"$ref": "#/$defs/periodType"},
+        "metric_type": {"$ref": "#/$defs/nonEmpty"}, "value": {"$ref": "#/$defs/finite"},
+        "unit": {"$ref": "#/$defs/nonEmpty"}, "currency": {"$ref": "#/$defs/currency"},
+        "consolidation_basis": {"$ref": "#/$defs/nonEmpty"}, "derivation_formula": {"$ref": "#/$defs/nonEmpty"},
+        "revenue_input": {"$ref": "#/$defs/input"}, "unit_price_input": {"$ref": "#/$defs/input"},
+        "capacity_ceiling": {"$ref": "#/$defs/capacity"},
+        "customs_applicability": {"type": "object", "additionalProperties": false, "required": ["status", "scope", "anchor"], "properties": {"status": {"enum": ["not_applicable", "macro_only", "pending", "company_level", "plant_level"]}, "scope": {"$ref": "#/$defs/nonEmpty"}, "anchor": {"$ref": "#/$defs/nonEmpty"}}},
+        "evidence_grade": {"enum": ["C", "D"]}, "retrieval_date": {"$ref": "#/$defs/nonEmpty"},
+        "scenario": {"type": "boolean"}, "comparison": {"$ref": "#/$defs/comparison"}, "recalibration": {"$ref": "#/$defs/recalibration"}
+      }
+    },
+    "customs": {
+      "type": "object", "additionalProperties": false,
+      "required": ["id", "kind", "customs_code", "calibration_scope", "applicability_status", "use_level", "target_metric", "target_product_family", "target_geography", "metadata", "conversion_method", "domestic_sales_evidence", "recalibration"],
+      "properties": {
+        "id": {"$ref": "#/$defs/nonEmpty"}, "kind": {"const": "customs_calibration"},
+        "customs_code": {"const": "8534"}, "calibration_scope": {"const": "macro_only"},
+        "applicability_status": {"enum": ["applicable_macro", "pending", "not_applicable_domestic_sales", "company_level", "plant_level"]},
+        "use_level": {"enum": ["region_industry", "company", "plant"]}, "target_metric": {"$ref": "#/$defs/nonEmpty"},
+        "target_product_family": {"$ref": "#/$defs/nonEmpty"}, "target_geography": {"$ref": "#/$defs/nonEmpty"},
+        "metadata": {"type": "object", "additionalProperties": false, "properties": {"tariff_year": {"$ref": "#/$defs/nonEmpty"}, "full_subheading": {"$ref": "#/$defs/nonEmpty"}, "direction": {"$ref": "#/$defs/nonEmpty"}, "quantity_unit": {"$ref": "#/$defs/nonEmpty"}, "product_scope": {"$ref": "#/$defs/nonEmpty"}, "trade_mode": {"$ref": "#/$defs/nonEmpty"}, "declarant": {"$ref": "#/$defs/nonEmpty"}, "origin": {"$ref": "#/$defs/nonEmpty"}, "attribution_method": {"$ref": "#/$defs/nonEmpty"}, "period": {"$ref": "#/$defs/nonEmpty"}, "coverage_gap": {"$ref": "#/$defs/nonEmpty"}, "conversion_anchor": {"$ref": "#/$defs/nonEmpty"}}, "minProperties": 0},
+        "conversion_method": {"enum": ["none", "macro_anchor", "showcase_unit_price_cycle"]},
+        "domestic_sales_evidence": {"type": "string"}, "recalibration": {"$ref": "#/$defs/recalibration"}
+      }
+    }
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "base": "valid_pass.json",
+  "cases": [
+    {"name": "customs_missing_metadata_indeterminate", "expected": "indeterminate", "status": "applicable_macro", "metadata_remove": ["origin"]},
+    {"name": "customs_pending_indeterminate", "expected": "indeterminate", "status": "pending"},
+    {"name": "customs_domestic_evidence_missing_indeterminate", "expected": "indeterminate", "status": "not_applicable_domestic_sales", "domestic_sales_evidence": ""},
+    {"name": "customs_company_fail", "expected": "fail", "status": "company_level", "use_level": "company"},
+    {"name": "customs_showcase_cycle_fail", "expected": "fail", "status": "applicable_macro", "conversion_method": "showcase_unit_price_cycle"}
+  ]
+}

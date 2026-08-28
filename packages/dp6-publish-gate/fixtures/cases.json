@@ -1,0 +1,16 @@
+{
+  "base": "valid_pass.json",
+  "cases": [
+    {"name": "over_capacity_fail", "expected": "fail", "patch": {"value": 1201}},
+    {"name": "missing_anchor_fail", "expected": "fail", "patch": {"capacity_ceiling.anchor": ""}},
+    {"name": "nan_fail", "expected": "fail", "special_value": "NaN"},
+    {"name": "inf_fail", "expected": "fail", "special_value": "Infinity"},
+    {"name": "unit_mismatch_indeterminate", "expected": "indeterminate", "patch": {"unit": "piece", "capacity_ceiling.unit": "piece", "comparison.upper_bound_unit": "piece"}},
+    {"name": "period_mismatch_indeterminate", "expected": "indeterminate", "patch": {"comparison.upper_bound_period": "2026Q3"}},
+    {"name": "subject_mismatch_indeterminate", "expected": "indeterminate", "patch": {"comparison.subject_id": "S2"}},
+    {"name": "unapproved_tolerance_indeterminate", "expected": "indeterminate", "adr_status": "unapproved"},
+    {"name": "weak_approval_ceiling_indeterminate", "expected": "indeterminate", "patch": {"capacity_ceiling.anchor_type": "approval_capacity"}},
+    {"name": "recalibration_partial_fail", "expected": "fail", "patch": {"recalibration.actual_value": 940}},
+    {"name": "recalibration_formula_fail", "expected": "fail", "patch": {"recalibration.actual_value": 940, "recalibration.actual_unit": "square_meter", "recalibration.actual_period": "2026Q2", "recalibration.error": 999, "recalibration.error_formula": "actual_value - inferred_value", "recalibration.date": "2026-08-28"}}
+  ]
+}
