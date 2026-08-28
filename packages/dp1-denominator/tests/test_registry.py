@@ -10,8 +10,10 @@ from pathlib import Path
 
 from dp1_denominator.adapters import (
     DraftAdapterError,
+    TPEX_LISTED_COMPANIES_ENDPOINT,
     TWSE_LISTED_COMPANIES_ENDPOINT,
     fetch_draft,
+    fetch_tpex_listed_company_draft,
     fetch_twse_listed_company_draft,
 )
 from dp1_denominator.cli import main as cli_main
@@ -267,11 +269,11 @@ class RegistryTests(unittest.TestCase):
         self.assertEqual(TWSE_LISTED_COMPANIES_ENDPOINT, "https://openapi.twse.com.tw/v1/opendata/t187ap03_L")
         self.assertEqual([row["entity_id"] for row in rows], ["issuer:TW:2330", "issuer:TW:4958"])
         self.assertTrue(all(row["record_status"] == "待核" for row in rows))
-        self.assertTrue(all(row["layer"] == "观察" for row in rows))
-        self.assertTrue(all(row["product_scope"] == "待核" for row in rows))
+        self.assertTrue(all(row["layer"] == "L2" for row in rows))
+        self.assertTrue(all(row["product_scope"] == "L2机械母集；未挂格" for row in rows))
         self.assertTrue(all(row["source_url"] == TWSE_LISTED_COMPANIES_ENDPOINT for row in rows))
         self.assertIn("產業別=半導體業", rows[0]["notes"])
-        self.assertIn("不构成 PCB 纳入裁决", rows[0]["notes"])
+        self.assertIn("不构成 PCB 主营", rows[0]["notes"])
         self.assertTrue(validate_frozen(rows).ok)
 
     def test_twse_listed_company_adapter_rejects_missing_official_fields(self) -> None:
@@ -295,6 +297,61 @@ class RegistryTests(unittest.TestCase):
                     "2026-08-28",
                     "--fixture",
                     str(FIXTURES / "twse_t187ap03_L.json"),
+                    "--output",
+                    str(output),
+                ]
+            )
+            rows = load_csv(output, FROZEN_FIELDS)
+        self.assertEqual(result, 0)
+        self.assertEqual(len(rows), 2)
+        self.assertTrue(all(row["record_status"] == "待核" for row in rows))
+
+    def test_tpex_listed_company_adapter_is_offline_capable_and_never_decides_scope(self) -> None:
+        rows = fetch_tpex_listed_company_draft(
+            query_date="2026-08-28",
+            fixture_path=FIXTURES / "tpex_mopsfin_t187ap03_O.json",
+        )
+
+        self.assertEqual(TPEX_LISTED_COMPANIES_ENDPOINT, "https://www.tpex.org.tw/openapi/v1/mopsfin_t187ap03_O")
+        self.assertEqual([row["entity_id"] for row in rows], ["issuer:TW:3105", "issuer:TW:6223"])
+        self.assertTrue(all(row["record_status"] == "待核" for row in rows))
+        self.assertTrue(all(row["layer"] == "L2" for row in rows))
+        self.assertTrue(all(row["product_scope"] == "L2机械母集；未挂格" for row in rows))
+        self.assertTrue(all(row["source_url"] == TPEX_LISTED_COMPANIES_ENDPOINT for row in rows))
+        self.assertIn("SecuritiesIndustryCode=27", rows[0]["notes"])
+        self.assertIn("不构成 PCB 主营", rows[0]["notes"])
+        self.assertTrue(validate_frozen(rows).ok)
+
+    def test_tpex_listed_company_adapter_rejects_missing_official_fields(self) -> None:
+        payload = [{"SecuritiesCompanyCode": "3105", "CompanyName": "穩懋半導體股份有限公司"}]
+        with tempfile.TemporaryDirectory() as directory:
+            fixture = Path(directory) / "tpex.json"
+            fixture.write_text(json.dumps(payload), encoding="utf-8")
+            with self.assertRaisesRegex(DraftAdapterError, "missing required TPEx fields"):
+                fetch_tpex_listed_company_draft(
+                    query_date="2026-08-28",
+                    fixture_path=fixture,
+                )
+
+    def test_legacy_x509_compatibility_is_restricted_to_tpex(self) -> None:
+        with self.assertRaisesRegex(DraftAdapterError, "restricted to the official TPEx endpoint"):
+            fetch_draft(
+                {
+                    "endpoint": "https://example.invalid/not-tpex",
+                    "allow_legacy_x509_chain": True,
+                }
+            )
+
+    def test_cli_fetches_tpex_fixture_as_pending_draft(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            output = Path(directory) / "tpex-draft.csv"
+            result = cli_main(
+                [
+                    "fetch-tpex-listed-draft",
+                    "--query-date",
+                    "2026-08-28",
+                    "--fixture",
+                    str(FIXTURES / "tpex_mopsfin_t187ap03_O.json"),
                     "--output",
                     str(output),
                 ]

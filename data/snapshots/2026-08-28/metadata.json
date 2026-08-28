@@ -1,0 +1,29 @@
+{
+  "schema_version": "denominator-source-snapshot.v1",
+  "retrieved_at": "2026-08-28T14:04:55Z",
+  "query_date": "2026-08-28",
+  "status": "pending_human_gate",
+  "sources": [
+    {
+      "source_id": "twse_t187ap03_L",
+      "url": "https://openapi.twse.com.tw/v1/opendata/t187ap03_L",
+      "http_status": 200,
+      "path": "twse_t187ap03_L.json",
+      "sha256": "c8143512f903efc124df091413fa8f171426c765d1076319ca866f07c662f315",
+      "row_count": 1095,
+      "source_statement_date": "1150827"
+    },
+    {
+      "source_id": "tpex_mopsfin_t187ap03_O",
+      "url": "https://www.tpex.org.tw/openapi/v1/mopsfin_t187ap03_O",
+      "http_status": 200,
+      "path": "tpex_mopsfin_t187ap03_O.json",
+      "sha256": "72ea1423a909bf54e17127daba14e561fa40b8c6fb7924b5eed28e8c8e3aa7a3",
+      "row_count": 890,
+      "source_statement_date": "1150828"
+    }
+  ],
+  "combined_row_count": 1985,
+  "issuer_code_intersection_count": 0,
+  "note": "G1-A 已批准 TWSE+TPEx（不含兴柜）为 L2 机械母集；快照仍待用户确认冻结时点，且不推定 PCB 主营、挂格或中国大陆产能。"
+}

@@ -8,7 +8,11 @@ import json
 import sys
 from pathlib import Path
 
-from .adapters import fetch_draft, fetch_twse_listed_company_draft
+from .adapters import (
+    fetch_draft,
+    fetch_tpex_listed_company_draft,
+    fetch_twse_listed_company_draft,
+)
 from .registry import (
     FROZEN_FIELDS,
     INCLUSION_DECISION_FIELDS,
@@ -109,6 +113,17 @@ def _twse_draft(args: argparse.Namespace) -> int:
     return 0
 
 
+def _tpex_draft(args: argparse.Namespace) -> int:
+    rows = fetch_tpex_listed_company_draft(
+        query_date=args.query_date,
+        fixture_path=args.fixture,
+        timeout_seconds=args.timeout_seconds,
+    )
+    write_csv(args.output, FROZEN_FIELDS, rows)
+    print(f"TPEx listed-company draft rows: {len(rows)}; status forced to 待核")
+    return 0
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description="PCB DP1 denominator registry")
     sub = parser.add_subparsers(dest="command", required=True)
@@ -150,6 +165,13 @@ def build_parser() -> argparse.ArgumentParser:
     twse_draft.add_argument("--timeout-seconds", type=float, default=20)
     twse_draft.add_argument("--output", required=True)
     twse_draft.set_defaults(func=_twse_draft)
+
+    tpex_draft = sub.add_parser("fetch-tpex-listed-draft")
+    tpex_draft.add_argument("--query-date", required=True)
+    tpex_draft.add_argument("--fixture")
+    tpex_draft.add_argument("--timeout-seconds", type=float, default=20)
+    tpex_draft.add_argument("--output", required=True)
+    tpex_draft.set_defaults(func=_tpex_draft)
     return parser
 
 

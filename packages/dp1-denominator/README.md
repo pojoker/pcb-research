@@ -98,7 +98,21 @@ python -m dp1_denominator.cli fetch-twse-listed-draft \
   --output /tmp/twse-listed-draft.csv
 ```
 
-该适配器只把交易所记录登记为 `观察` 层的待核 issuer 候选。`產業別` 和上市事实仅作为原始字段保留在 notes，**不**自动推定 PCB 产品范围、研究分母纳入、层级、供应关系或任何人工裁决；输出仍须经 DP1 人闸。
+G1-A 已批准“TWSE/TPEx 完整发行人清单”为 L2 筛选母集，因此两个固定适配器把交易所记录登记为 `L2` 层的待核 issuer 行；`產業別` 和上市事实仅作为原始字段保留在 notes，**不**自动推定 PCB 主营、挂格、中国大陆产能、供应关系或逐主体人工裁决。
+
+TPEx 官方上柜股票基本资料适配器固定使用
+`https://www.tpex.org.tw/openapi/v1/mopsfin_t187ap03_O`，同样只生成待核 issuer 候选：
+
+```bash
+PYTHONPATH=packages/dp1-denominator \
+python -m dp1_denominator.cli fetch-tpex-listed-draft \
+  --query-date 2026-08-28 \
+  --output /tmp/tpex-listed-draft.csv
+```
+
+TWSE 与 TPEx 必须分别保留来源 URL 和快照；二者合并后才构成 L2“上市/上柜完整发行人筛选母集”的机械候选。交易所登记仍不等于 PCB 纳入、挂格或中国大陆产能结论。
+TPEx 当前证书链在 OpenSSL 3.6 的 strict extension 检查下会报缺失扩展；适配器仅对该官方 endpoint 关闭
+`VERIFY_X509_STRICT`，仍保留 CA 链与主机名校验，不允许无验证 HTTPS。
 
 ## 关键规则
 

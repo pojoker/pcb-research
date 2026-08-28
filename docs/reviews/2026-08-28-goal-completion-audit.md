@@ -11,6 +11,8 @@ canonical 公司/产能实例、正式分母和量化账本，且容差 ADR 与�
 
 本审计把“测试通过”“文件存在”和“目标完成”分开。只有与需求同范围的权威产物和校验结果才能证明完成；草稿、候选、待核记录或窄测试不能替代全图验收。
 
+2026-08-28 实例候选首轮新增：2,036 条分母候选、12 条 T1 来源候选、11 个公司 point 候选、1 个禁止加总 pair 候选、9 条量化候选，以及两份 proposed ADR；L2 的 1,985 行已有官方原始快照与 SHA-256。它们通过候选自检，但仍未通过后续人闸，故本审计结论不升级为“全图完成”。详见 `docs/reviews/2026-08-28-instance-candidate-integration-audit.md`。
+
 ## 要求—证据矩阵
 
 | 完成要求 | 权威依据 | 当前证据 | 判定 |
@@ -19,13 +21,13 @@ canonical 公司/产能实例、正式分母和量化账本，且容差 ADR 与�
 | 每个事实 verdict 有适用域匹配的一手证据；不可验项有重开条件 | `graph/README.md` 判定纪律 | 31 supported、3 partially supported、5 publicly unverifiable、1 analyst annotation；25 份一手来源、49 条证据关系、6 个开放问题 | **已证明当前证据边界** |
 | “没有搜到”不被写成反驳 | ADR-0001、`CONTEXT.md` 检索协议定义 | `search_log.csv` 有 6 条协议；5 条为 scope 不匹配、1 条为会话无量表；校验器禁止候选无 URL | **已证明** |
 | 物理格与路线轴成为冻结研究契约 | `docs/03-结构骨架.md`、`tree.yaml`、人闸 G4/G6 | 用户已批准 G4-A/G6-A；`tree.yaml.status=frozen`，30 cells 与 A–F 已结构化；M4 已明确为活动格、裸词禁入 | **已证明研究契约冻结；非公司事实冻结** |
-| 分母层、ID、双计键和真实来源快照冻结 | `docs/01-宇宙分母.md`、DP1 验收 | G1/G2 研究口径已批准，DP1 机械闸 14/14 通过；TWSE 实际适配器输出 1,095 条 `观察/待核`；fixtures `_frozen.csv` 仍为示例待核，不是正式分母 | **契约已冻结；数据未冻结** |
+| 分母层、ID、双计键和真实来源快照冻结 | `docs/01-宇宙分母.md`、DP1 验收 | G1/G2 研究口径已批准；DP1 18/18；L1-A/B/C、L2、L3、L4 共 2,036 条候选；TWSE/TPEx 1,985 行原始快照、哈希和计数已落盘，仍待用户确认冻结时点与逐主体裁决 | **契约与候选快照已完成；正式数据待人闸** |
 | 来源台账、T1 承重和 8534 口径冻结 | DP2 验收、不变量⑧/⑨/㉑ | G5 仅宏观适用域已批准，DP2 19/19 与 selftest 通过；当前 CSV 是空模板或探测 fixture，T1 与具体 8534 快照尚不存在 | **契约已冻结；数据未冻结** |
 | 词表经过真实语料实测并由判定闸批准 | DP4 验收、`docs/04-词表.md` | G4 的 M4/裸词/M6/M8 规则已批准；DP4 6/6、20 fixtures 通过且每词有排除规则，但候选词表仍须逐条事实性批准后才可成 canonical | **机械通过；候选词表数据未冻结** |
-| 30 个格有 canonical 公司/法人/厂址/集团 points 与制造/供应/委外 edges | `docs/plans/06-外包开发任务书.md` DP5、不变量②/③/⑯–⑳ | 仓库没有 canonical `points.csv`、公司 `edges.csv`、产能账本、route profile 或产品族实例账本 | **缺失** |
-| tree、账本、发布闸和判例库有 Wave 2 校验器 | DP3/DP5/DP6/DP7 交付和反例表 | `packages/dp3-tree`、`dp5-ledger`、`dp6-publish-gate`、`dp7-casebook` 均存在；全仓 81/81 单元测试、7/7 独立 selftest 通过 | **机械实现已完成** |
-| 量化结论能通过三态发布闸且不可比项保持 indeterminate | 不变量⑪/⑮/㉑/㉒ | DP6 已证明 pass/fail/indeterminate、8534 宏观边界及不可发布规则；但没有真实公司级量化账本，容差/汇率 ADR 仍 pending | **机械规则已证明；真实结果缺失** |
-| canonical 结果通过全量校验并同步远端 | `CLAUDE.md` 会话末纪律 | `scan.py --check`、81/81 单元测试、7/7 selftest 与全部 JSON 校验通过，`main` 已同步；全图实例数据尚不存在 | **工具链满足；研究目标局部满足** |
+| 30 个格有 canonical 公司/法人/厂址/集团 points 与制造/供应/委外 edges | `docs/plans/06-外包开发任务书.md` DP5、不变量②/③/⑯–⑳ | 已有 11 个代表性 point 候选、1 个禁止加总 pair 候选、0 个合格 manufacturing edge；只覆盖 9 家代表性公司，且仍待 T1/挂格/身份人闸 | **候选首轮完成；canonical 与 30 格覆盖仍缺** |
+| tree、账本、发布闸和判例库有 Wave 2 校验器 | DP3/DP5/DP6/DP7 交付和反例表 | `packages/dp3-tree`、`dp5-ledger`、`dp6-publish-gate`、`dp7-casebook` 均存在；当前全仓 85/85 单元测试、DP1–DP7 加候选账本 8/8 独立 selftest 通过 | **机械实现已完成** |
+| 量化结论能通过三态发布闸且不可比项保持 indeterminate | 不变量⑪/⑮/㉑/㉒ | DP6 已证明三态；新增 9 条直接披露/监管量化候选且保持指标分列；容差/汇率 ADR 为 proposed，缺身份/厂址/产品族者不进入 DP6 | **候选账本已起步；正式结果与 ADR 实例待人闸** |
+| canonical 结果通过全量校验并同步远端 | `CLAUDE.md` 会话末纪律 | `scan.py --check`、85/85 单元测试、8/8 selftest、39 个 JSON 与 diff 检查通过；本轮变更待提交并同步，候选人闸未完成 | **工具链满足；候选研究目标局部满足** |
 
 ## 当前可安全使用的结论
 

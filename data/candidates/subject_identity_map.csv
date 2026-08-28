@@ -1,0 +1,14 @@
+canonical_entity_id,entity_type,denominator_record_id,dp5_subject_id,capacity_subject_id,name,mapping_scope,mapping_status,missing_id_reason
+issuer:CN:002463,issuer,cand:l1a-cn-002463,issuer_cn_002463,,沪电股份,发行人证券代码,pending,法人厂址集团待核
+issuer:CN:300476,issuer,cand:l1a-cn-300476,issuer_cn_300476,,胜宏科技,发行人证券代码,pending,法人厂址集团待核
+issuer:CN:688183,issuer,cand:l1a-cn-688183,issuer_cn_688183,,生益电子,发行人证券代码,pending,法人厂址集团待核
+issuer:CN:600183,issuer,cand:l1b-cn-600183,issuer_cn_600183,,生益科技,发行人证券代码,pending,法人厂址集团待核
+issuer:CN:603256,issuer,cand:l1b-cn-603256,issuer_cn_603256,,宏和科技,发行人证券代码,pending,法人厂址集团待核
+issuer:CN:601208,issuer,cand:l1b-cn-601208,issuer_cn_601208,,东材科技,发行人证券代码,pending,法人厂址集团待核
+issuer:CN:301200,issuer,cand:l1c-cn-301200,issuer_cn_301200,,大族数控,发行人证券代码,pending,法人厂址集团待核
+issuer:CN:688700,issuer,cand:l1c-cn-688700,issuer_cn_688700,,东威科技,发行人证券代码,pending,法人厂址集团待核
+issuer:CN:688630,issuer,cand:l1c-cn-688630,issuer_cn_688630,,芯碁微装,发行人证券代码,pending,法人厂址集团待核
+issuer:CN:603328,issuer,cand:l1a-cn-603328,,issuer_603328,依顿电子,发行人证券代码,pending,法人厂址集团待核
+issuer:CN:603228,issuer,cand:l1a-cn-603228,,issuer_603228,景旺电子,发行人证券代码,pending,法人厂址集团待核
+issuer:CN:002916,issuer,cand:l1a-cn-002916,,issuer_002916,深南电路,发行人证券代码,pending,法人厂址集团待核
+issuer:CN:002436,issuer,cand:l1a-cn-002436,,issuer_002436,兴森科技,发行人证券代码,pending,法人厂址集团待核
