@@ -1,0 +1,13 @@
+{
+  "schema_version": "canonical.tolerance-policy.v1",
+  "status": "accepted",
+  "human_gate_id": "H4",
+  "decided_by": "user",
+  "decision_date": "2026-08-28",
+  "global_default": null,
+  "rule": "exact_scope_calibration",
+  "insufficient_evidence_result": "indeterminate",
+  "approval_capacity_ceiling_strength": "weak_only",
+  "approved_tolerance_instances": [],
+  "note": "ADR 被接受不等于任意数值实例获批；当前没有可用于 DP6 的容差实例。"
+}

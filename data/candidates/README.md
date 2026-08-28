@@ -10,3 +10,5 @@
 - `subject_identity_map.csv`：不同候选账本的主体 ID 桥；映射状态仍可为 pending，不据名称猜配法人、厂址或集团。
 
 机械转换只能保持 `pending/待核`。T1、挂格、集团关系、禁止加总期间、强天顶、容差和汇率规则必须由人闸留痕。
+
+当前 H1–H4 已另行形成正式层。回归顺序为先运行本目录 `selftest.py`，确认候选底稿仍保持 pending，再运行 `data/canonical/selftest.py` 检查独立人闸输入、确定性生成与正式阻断条件。

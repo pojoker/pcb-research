@@ -1,0 +1,14 @@
+{
+  "schema_version": "canonical.fx-policy.v1",
+  "status": "accepted",
+  "human_gate_id": "H4",
+  "decided_by": "user",
+  "decision_date": "2026-08-28",
+  "target_currency": "CNY",
+  "preserve_original_currency": true,
+  "stock_rate_rule": "period_end_official_closing_or_last_preceding_official_quote",
+  "flow_rate_rule": "transaction_date_first",
+  "period_average_rule": "requires_separate_volatility_human_gate",
+  "missing_or_unapproved_result": "indeterminate",
+  "instantiated_conversions": []
+}

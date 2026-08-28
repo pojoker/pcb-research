@@ -1,0 +1,32 @@
+{
+  "schema_version": "canonical.human-gates.v1",
+  "decision_date": "2026-08-28",
+  "approved_by": "user",
+  "raw_user_response": "统一 H1-H14",
+  "interpretation": "批量批准当前门单中已定义的 H1-H4；H5-H14 未定义，故不执行也不创造裁决。",
+  "defined_gate_ids": ["H1", "H2", "H3", "H4"],
+  "undefined_gate_ids": ["H5", "H6", "H7", "H8", "H9", "H10", "H11", "H12", "H13", "H14"],
+  "undefined_gate_action": "none",
+  "decisions": [
+    {
+      "gate_id": "H1",
+      "status": "approved",
+      "scope": "冻结 2026-08-28 TWSE+TPEx（不含兴柜）L2 机械母集 1,985 行；不证明 PCB 主营或大陆产能。"
+    },
+    {
+      "gate_id": "H2",
+      "status": "approved",
+      "scope": "12 类来源仅按逐行 coverage_scope+review_note 获得 T1 承重许可；导航页不替代实际文件。"
+    },
+    {
+      "gate_id": "H3",
+      "status": "approved",
+      "scope": "冻结 13 家发行人分母；批准 11 points、0 manufacturing edges、1 禁止加总 pair、9 条披露快照。"
+    },
+    {
+      "gate_id": "H4",
+      "status": "approved",
+      "scope": "接受容差与 FX 规则形状；不批准容差数值实例、期间平均波动阈值或实际汇率换算。"
+    }
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "schema_version": "canonical.build-manifest.v1",
+  "generated_on": "2026-08-28",
+  "human_gate_source": "data/decisions/2026-08-28-h1-h4.json",
+  "human_gate_source_sha256": "70555b9f1ce1a207ac2e448c07a8d3b18564141aec0addca6c15867e9645292c",
+  "artifacts": [
+    {
+      "path": "denominator_l2_frozen.csv",
+      "sha256": "9422ea7c5da2c7e789ff11c631382086064ff720142601c3dd5cf159bfcf6e22"
+    },
+    {
+      "path": "inclusion_decision_l2.csv",
+      "sha256": "81f031324549c73e860b5814a5efa5194d8315a0b0f75e168cc53b6c81b7f262"
+    },
+    {
+      "path": "denominator_instances_frozen.csv",
+      "sha256": "cb554d956dd8842adac27bd2e90e391581217b432627e9ed9d75797949633bf9"
+    },
+    {
+      "path": "inclusion_decision_instances.csv",
+      "sha256": "ff288e6f7a72e8f318e6f5af7c1f69075847b360389120c35564f0942a4f6f0c"
+    },
+    {
+      "path": "subject_identity_map.csv",
+      "sha256": "fbaf083afbad8a9b619f9d8fb19ada5f6dcf5a4e0d14ea970a5a7ac074055f92"
+    },
+    {
+      "path": "t1_source_ledger.csv",
+      "sha256": "b3bff836970092703cb8121fd58918ae7a4b6fa846d0f175aeca771dc553cfe3"
+    },
+    {
+      "path": "company_points_ledger.json",
+      "sha256": "ddcde24248c8275be2b9d464f9ecd8d886acff479e75497807f84f8a48ee2eea"
+    },
+    {
+      "path": "capacity_claim_snapshots.json",
+      "sha256": "bcdb4356f8416d1f713b5ad306a6e1a722a60898579a2dd821d8b31ae0a582ef"
+    },
+    {
+      "path": "tolerance_policy.json",
+      "sha256": "dae0c9eef96d3049c7947c11a8d3ae995d823f8c75d707993dc4d0b03801b78c"
+    },
+    {
+      "path": "fx_policy.json",
+      "sha256": "7fad1358e5bbafbcfa4ae13d7281e02952e97f80511a82a6ce73a735bbbab168"
+    },
+    {
+      "path": "human_gate_decisions.json",
+      "sha256": "9c7e5e96ddd32d8938afe9d21d0b356325d74131f182f6cc9a24199341fb0275"
+    }
+  ]
+}

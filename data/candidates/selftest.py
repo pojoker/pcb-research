@@ -91,8 +91,12 @@ def main() -> int:
     require(not (twse_codes & tpex_codes), "TWSE/TPEx issuer code intersection is non-zero")
     require(len(twse_codes) + len(tpex_codes) == 1985, "L2 snapshot count changed")
 
+    gate_path = ROOT / "data" / "canonical" / "human_gate_decisions.json"
+    gates = json.loads(gate_path.read_text(encoding="utf-8"))
+    h4 = next((row for row in gates["decisions"] if row["gate_id"] == "H4"), None)
+    require(h4 is not None and h4["status"] == "approved", "accepted ADRs lack an approved H4 gate")
     for adr in (ROOT / "docs" / "adr" / "0002-capacity-ceiling-tolerance.md", ROOT / "docs" / "adr" / "0003-fx-conversion-policy.md"):
-        require("status: proposed" in adr.read_text(encoding="utf-8")[:80], f"ADR escaped proposed status: {adr.name}")
+        require("status: accepted" in adr.read_text(encoding="utf-8")[:80], f"ADR is not tied to accepted H4 status: {adr.name}")
 
     print("candidate selftest: PASS")
     print("denominator=2036 t1_sources=12 points=11 manufacturing_edges=0 capacity_metrics=9 l2_snapshot=1985")
