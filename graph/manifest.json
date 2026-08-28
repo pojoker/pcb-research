@@ -9,7 +9,8 @@
     "graph/evidence.csv",
     "graph/claim_evidence.csv",
     "graph/knowledge_edges.csv",
-    "graph/open_questions.csv"
+    "graph/open_questions.csv",
+    "graph/search_log.csv"
   ],
   "enums": {
     "claim_class": ["definition", "process", "generic_mechanism", "application_observation", "application_inference", "negative_constraint", "analysis_annotation"],
@@ -18,7 +19,8 @@
     "evidence_relation": ["supports", "refutes", "limits", "context_only"],
     "scope_match": ["exact", "partial", "generic_only", "mismatch"],
     "source_role": ["primary_standard", "primary_company", "primary_research"],
-    "edge_polarity": ["positive", "negative", "conditional"]
+    "edge_polarity": ["positive", "negative", "conditional"],
+    "search_result": ["no_candidate_found", "candidate_not_scope_matched", "candidate_found", "access_blocked"]
   },
   "expected_discussion_claim_ids": [
     "CLM-001", "CLM-002", "CLM-003", "CLM-004", "CLM-005", "CLM-006", "CLM-007", "CLM-008", "CLM-009", "CLM-010",

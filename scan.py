@@ -15,6 +15,7 @@ import json
 import re
 from collections import Counter, defaultdict
 from dataclasses import dataclass, field
+from datetime import date
 from pathlib import Path
 from typing import Iterable
 from urllib.parse import urlparse
@@ -28,6 +29,7 @@ ID_PATTERNS = {
     "relation_id": re.compile(r"^CER-\d{3}$"),
     "edge_id": re.compile(r"^KED-\d{3}$"),
     "question_id": re.compile(r"^Q-\d{3}$"),
+    "search_id": re.compile(r"^SRCH-\d{3}$"),
 }
 
 SCHEMAS = {
@@ -37,6 +39,7 @@ SCHEMAS = {
     "claim_evidence.csv": ("relation_id", "claim_id", "evidence_id", "relation", "scope_match", "weight", "notes"),
     "knowledge_edges.csv": ("edge_id", "from_concept_id", "relation", "to_concept_id", "claim_id", "polarity", "scope", "status"),
     "open_questions.csv": ("question_id", "claim_id", "missing_evidence_type", "status", "priority", "reopen_condition", "next_action"),
+    "search_log.csv": ("search_id", "question_id", "searched_at", "search_scope", "search_expression", "result", "candidate_source_url", "notes"),
 }
 
 EXPECTED_CELLS = {
@@ -146,6 +149,7 @@ def validate_graph(root: Path = ROOT) -> Report:
     relations = _index(data["claim_evidence.csv"], "relation_id", report, "claim_evidence.csv")
     edges = _index(data["knowledge_edges.csv"], "edge_id", report, "knowledge_edges.csv")
     questions = _index(data["open_questions.csv"], "question_id", report, "open_questions.csv")
+    searches = _index(data["search_log.csv"], "search_id", report, "search_log.csv")
 
     allowed = manifest.get("enums", {})
     allowed_cells = set(cell_ids) | route_axis_ids | {"-"}
@@ -208,6 +212,22 @@ def validate_graph(root: Path = ROOT) -> Report:
             report.error(f"open_questions.csv:{line}: dangling claim_id {claim_id!r}")
         question_claims.add(claim_id)
 
+    for line, row in enumerate(data["search_log.csv"], 2):
+        if row.get("question_id") not in questions:
+            report.error(f"search_log.csv:{line}: dangling question_id {row.get('question_id')!r}")
+        try:
+            date.fromisoformat(row.get("searched_at", ""))
+        except ValueError:
+            report.error(f"search_log.csv:{line}: searched_at must be ISO YYYY-MM-DD")
+        result = row.get("result", "")
+        if result not in set(allowed.get("search_result", [])):
+            report.error(f"search_log.csv:{line}: invalid result {result!r}")
+        candidate_url = row.get("candidate_source_url", "")
+        if candidate_url != "-" and not _absolute_http_url(candidate_url):
+            report.error(f"search_log.csv:{line}: candidate_source_url must be absolute http(s) or '-'")
+        if result in {"candidate_not_scope_matched", "candidate_found"} and candidate_url == "-":
+            report.error(f"search_log.csv:{line}: {result} requires candidate_source_url")
+
     for claim_id, claim in claims.items():
         verdict = claim.get("verdict")
         linked = evidence_by_claim.get(claim_id, [])
@@ -244,6 +264,7 @@ def validate_graph(root: Path = ROOT) -> Report:
         "claim_evidence_relations": len(relations),
         "knowledge_edges": len(edges),
         "open_questions": len(questions),
+        "search_log_entries": len(searches),
         **{f"verdict_{key}": value for key, value in sorted(verdict_counts.items())},
     }
     if verdict_counts.get("pending", 0):
