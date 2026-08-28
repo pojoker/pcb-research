@@ -1,0 +1,45 @@
+concept_id,label,kind,system,cell_id,status,notes
+CON-PCB,印刷电路板,artifact,physical,FAB1,candidate,裸板概念；不含元件贴装
+CON-PCBA,印刷电路板组件,artifact,outside,-,candidate,PCB 经元件贴装后的下游邻居
+CON-CCL,覆铜板,material,physical,M1,candidate,制造刚性 PCB 的板厂投入件
+CON-COPPER-FOIL,铜箔,material,physical,M3,candidate,需区分独立商品箔与已复合含箔
+CON-RESIN,树脂体系,material,physical,M4,candidate,未复合树脂与固化体系
+CON-GLASS-CLOTH,玻纤布,material,physical,M5,candidate,典型增强材料之一
+CON-CORE,Core 芯层,material_form,physical,M1,candidate,完全固化且有固定厚度的层压材料形态
+CON-PREPREG,Prepreg 半固化片,material_form,physical,M2,candidate,压合前 B 阶粘结材料形态
+CON-SOLDER-MASK,阻焊层,material,physical,MSK,candidate,永久留在板面的保护层
+CON-SURFACE-FINISH,表面处理层,material,physical,M7,candidate,保护焊盘并提供可焊表面
+CON-VIA,过孔,feature,physical,P3,candidate,实现层间连接的孔结构
+CON-MULTILAYER,多层板,artifact,route,B,candidate,具有多层导体与介质结构的 PCB
+CON-SIGNAL-LAYER,信号层,structure,physical,-,candidate,承载信号走线的铜层
+CON-GROUND-PLANE,地平面,structure,physical,-,candidate,作为参考和回流路径的平面
+CON-POWER-PLANE,电源平面,structure,physical,-,candidate,板级供电网络的一部分
+CON-ROUTING-DENSITY,布线密度,metric,route,C,candidate,单位面积内的互连压力
+CON-IMPEDANCE,受控阻抗,property,mechanism,-,candidate,由截面几何与材料共同决定的传输线属性
+CON-DIELECTRIC-LOSS,介质损耗,mechanism,mechanism,-,candidate,电磁能量在介质中的耗散
+CON-CONDUCTOR-LOSS,导体损耗,mechanism,mechanism,-,candidate,电流在导体中的耗散
+CON-SKIN-EFFECT,趋肤效应,mechanism,mechanism,-,candidate,交流电流随频率升高向导体表面集中
+CON-COPPER-ROUGHNESS,铜面粗糙度,property,mechanism,-,candidate,影响高频导体损耗的表面属性
+CON-CROSSTALK,串扰,mechanism,mechanism,-,candidate,相邻互连之间的非期望耦合
+CON-REFLECTION,反射,mechanism,mechanism,-,candidate,阻抗不连续导致的反射波
+CON-VIA-STUB,过孔残桩,feature,mechanism,P3,candidate,未参与连接的过孔导体段
+CON-INSERTION-LOSS,插入损耗,metric,mechanism,-,candidate,链路加入互连后的传输损耗
+CON-HDI,高密度互连,route,route,FAB1,candidate,以更细线路和更小孔结构提高互连密度的路线
+CON-MICROVIA,微孔,feature,route,P3,candidate,受定义边界约束的小孔互连结构
+CON-BACKDRILL,背钻,process,physical,P3,candidate,去除不需要过孔残桩的加工
+CON-PDN,电源分配网络,system,mechanism,-,candidate,从供电源到负载的电气网络
+CON-I2R,电阻损耗,mechanism,mechanism,-,candidate,电流与电阻共同形成的焦耳损耗
+CON-RACK-POWER,机柜功率,metric,application,-,candidate,系统级功率而非单板结构参数
+CON-STACKUP,PCB 层叠,structure,physical,-,candidate,导体层和介质层的排列与参数集合
+CON-GB300,GB300 NVL72,product,application,-,candidate,NVIDIA 机架级系统
+CON-COMPUTE-TRAY,计算托盘,product_component,application,-,candidate,GB300 或 Rubin 系统中的计算组件
+CON-SWITCH-TRAY,NVLink 交换托盘,product_component,application,-,candidate,机架级 NVLink 交换组件
+CON-NVLINK,NVLink,interconnect,application,-,candidate,NVIDIA GPU 互联技术
+CON-SPECTRUM6,Spectrum-6,product,application,-,candidate,NVIDIA 以太网交换平台
+CON-RUBIN-TRAY,Rubin 计算托盘,product_component,application,-,candidate,Vera Rubin 代计算托盘
+CON-PCB-MIDPLANE,PCB midplane,product_component,application,FAB1,candidate,托盘内部的中央 PCB 互联件
+CON-COPPER-CABLE,铜缆,interconnect,application,-,candidate,机架内外的铜互联载体
+CON-OPTICAL-INTERCONNECT,光互联,interconnect,application,-,candidate,使用光传输的互联方式
+CON-BOM,系统 BOM,evidence_object,application,-,candidate,判断面积、数量和价值量所需的系统物料清单
+CON-YIELD,制造良率,metric,application,-,candidate,合格产出比例
+CON-ASP,平均售价,metric,application,-,candidate,需明确产品族和期间的价格指标

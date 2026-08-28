@@ -1,0 +1,6 @@
+question_id,claim_id,missing_evidence_type,status,priority,reopen_condition,next_action
+Q-001,CLM-026,逐板卡 BOM 尺寸层数数量单价和一致加总口径,open,high,获得同代整机可比 BOM 或拆机测量,只登记一手 BOM 或可复核拆机数据
+Q-002,CLM-027,各板卡同维度 stack-up 损耗预算线宽线距良率与可靠性数据,open,high,获得至少两类板卡可比的同口径工程数据,先定义技术要求比较维度
+Q-003,CLM-034,新增 midplane 与被替代线缆连接板的系统 BOM 差额,open,medium,获得 Rubin 托盘前后代 BOM 或成本拆分,禁止用组件数量代替价值量
+Q-004,CLM-035,具体 NVIDIA 板卡 stack-up Gerber 截面材料牌号与供应链一手披露,open,high,获得可定位到产品与板卡的一手证据,通用材料规律只能作 context_only
+Q-005,CLM-038,Rubin PCB 良率成本供应商覆盖与设计余量,open,high,获得公司一手量产指标或监管披露,量产状态不得自动关闭

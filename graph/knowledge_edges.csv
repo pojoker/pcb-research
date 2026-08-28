@@ -1,0 +1,22 @@
+edge_id,from_concept_id,relation,to_concept_id,claim_id,polarity,scope,status
+KED-001,CON-PCB,distinct_from,CON-PCBA,CLM-002,negative,通用定义,candidate
+KED-002,CON-CCL,input_to,CON-PCB,CLM-003,positive,通用制造,candidate
+KED-003,CON-COPPER-FOIL,component_of,CON-CCL,CLM-004,conditional,典型刚性玻纤增强 CCL,candidate
+KED-004,CON-RESIN,component_of,CON-CCL,CLM-004,conditional,典型刚性玻纤增强 CCL,candidate
+KED-005,CON-GLASS-CLOTH,component_of,CON-CCL,CLM-004,conditional,典型刚性玻纤增强 CCL,candidate
+KED-006,CON-CORE,material_form_of,CON-CCL,CLM-006,conditional,多层板芯层,candidate
+KED-007,CON-PREPREG,bonds,CON-CORE,CLM-007,positive,多层压合,candidate
+KED-008,CON-MULTILAYER,increases_capacity_for,CON-ROUTING-DENSITY,CLM-012,positive,通用多层板,candidate
+KED-009,CON-GROUND-PLANE,provides_reference_for,CON-SIGNAL-LAYER,CLM-013,positive,高速多层板,candidate
+KED-010,CON-COPPER-ROUGHNESS,aggravates,CON-CONDUCTOR-LOSS,CLM-017,conditional,高频铜互连,candidate
+KED-011,CON-VIA-STUB,can_cause,CON-REFLECTION,CLM-019,conditional,高速过孔,candidate
+KED-012,CON-BACKDRILL,removes,CON-VIA-STUB,CLM-020,positive,背钻工艺,candidate
+KED-013,CON-ROUTING-DENSITY,may_require,CON-HDI,CLM-022,conditional,高密度板,candidate
+KED-014,CON-ROUTING-DENSITY,may_require,CON-MULTILAYER,CLM-022,conditional,高密度板,candidate
+KED-015,CON-RACK-POWER,does_not_imply,CON-STACKUP,CLM-023,negative,具体产品,candidate
+KED-016,CON-COMPUTE-TRAY,does_not_imply,CON-BOM,CLM-026,negative,GB300 价值量判断,candidate
+KED-017,CON-NVLINK,does_not_imply,CON-STACKUP,CLM-029,negative,NVLink 总带宽,candidate
+KED-018,CON-PCB-MIDPLANE,replaces_part_of,CON-COPPER-CABLE,CLM-031,conditional,Rubin 托盘内部,candidate
+KED-019,CON-PCB-MIDPLANE,does_not_imply,CON-BOM,CLM-034,negative,Rubin 系统净价值量,candidate
+KED-020,CON-RUBIN-TRAY,does_not_imply,CON-YIELD,CLM-038,negative,Rubin 量产,candidate
+KED-021,CON-OPTICAL-INTERCONNECT,does_not_replace_all,CON-PCB,CLM-040,negative,AI 系统,candidate

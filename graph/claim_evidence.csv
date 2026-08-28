@@ -1,0 +1,47 @@
+relation_id,claim_id,evidence_id,relation,scope_match,weight,notes
+CER-001,CLM-001,EVD-001,supports,exact,high,标准定义支持 PCB 作为含导电互连的复合基板
+CER-002,CLM-002,EVD-001,supports,exact,high,标准区分 PCB 与含元件的 PWA
+CER-003,CLM-002,EVD-022,supports,exact,high,IPC 装联定义提供独立支持
+CER-004,CLM-003,EVD-006,supports,exact,high,材料和制造流程区分层压材料投入与图形化裸板
+CER-005,CLM-004,EVD-002,supports,exact,high,材料商制造资料支持典型玻纤增强结构
+CER-006,CLM-005,EVD-003,supports,exact,high,无玻纤全聚酰亚胺覆铜材料构成反例
+CER-007,CLM-006,EVD-004,supports,exact,high,完全固化 laminate 定义不要求已有线路
+CER-008,CLM-007,EVD-004,supports,exact,high,prepreg 的部分固化与后续压合状态获得支持
+CER-009,CLM-008,EVD-005,supports,exact,high,同一 1080 glass style 同时见于两种产品形态
+CER-010,CLM-009,EVD-005,supports,exact,high,共同 glass style 直接阻断玻纤必然不同的推论
+CER-011,CLM-009,EVD-004,limits,partial,high,core 与 prepreg 的固化和加工状态仍不同
+CER-012,CLM-010,EVD-006,supports,exact,high,NASA 制造流程支持典型多层刚性板顺序
+CER-013,CLM-010,EVD-023,supports,exact,high,板厂公开流程提供独立交叉支持
+CER-014,CLM-011,EVD-007,supports,exact,high,标准定义支持孔金属化的层间连接目的
+CER-015,CLM-012,EVD-008,supports,exact,medium,多层演进与密度及电源地平面相关
+CER-016,CLM-013,EVD-009,supports,exact,high,连续参考平面和回流路径由设计指南支持
+CER-017,CLM-014,EVD-009,supports,exact,high,设计指南支持串扰隔离与平面连续性
+CER-018,CLM-015,EVD-009,supports,exact,high,高速互连按受控阻抗传输线设计
+CER-019,CLM-016,EVD-011,supports,exact,high,原始测量和模型支持介质损耗的条件化影响
+CER-020,CLM-016,EVD-002,supports,exact,medium,材料商资料提供损耗角正切与衰减关系
+CER-021,CLM-017,EVD-012,supports,exact,high,可比测试直接支持铜粗糙度增加高频损耗
+CER-022,CLM-018,EVD-009,supports,exact,high,指南把几何与层叠参数作为阻抗控制变量
+CER-023,CLM-019,EVD-009,supports,exact,high,指南说明未使用 stub 的谐振和插损影响
+CER-024,CLM-020,EVD-009,supports,exact,high,指南明确背钻用于去除未使用 stub
+CER-025,CLM-021,EVD-008,supports,exact,medium,技术综述将引脚数和封装密度与互连压力相联系
+CER-026,CLM-022,EVD-009,context_only,partial,medium,指南展示通孔背钻和布局约束等替代手段但不足以穷尽路线
+CER-027,CLM-023,EVD-013,supports,exact,high,基础关系支持固定电阻下的 I 平方 R 损耗
+CER-028,CLM-023,EVD-014,supports,exact,high,原始技术论文把该关系落到板级高电流供电与温升
+CER-029,CLM-024,EVD-015,supports,exact,high,NVIDIA 官方组件页给出 18 与 9 的数量
+CER-030,CLM-025,EVD-015,supports,exact,high,NVIDIA 官方组件页给出计算托盘主要组成
+CER-031,CLM-028,EVD-015,context_only,mismatch,low,官方仅给组成而没有星级技术评级
+CER-032,CLM-029,EVD-018,supports,exact,high,总带宽与 links 数同时翻倍阻断单通道速率推论
+CER-033,CLM-030,EVD-020,supports,exact,high,NVIDIA 官方披露 Spectrum-6 使用 200G PAM4 SerDes
+CER-034,CLM-031,EVD-017,supports,exact,high,官方把 PCB midplane 的作用域定位在计算托盘内部
+CER-035,CLM-032,EVD-017,supports,exact,high,同一官方来源披露机架 spine 约五千根铜缆
+CER-036,CLM-033,EVD-017,supports,exact,high,同一系统同时存在托盘 midplane 与机架铜缆
+CER-037,CLM-035,EVD-015,context_only,generic_only,low,系统组成资料不披露板级 stack-up 与材料工艺
+CER-038,CLM-035,EVD-017,context_only,generic_only,low,架构资料不披露 midplane 层数材料或微孔结构
+CER-039,CLM-036,EVD-009,context_only,partial,medium,高速指南含通孔背钻路线但不能证明任意具体服务器板结构
+CER-040,CLM-037,EVD-021,supports,exact,high,full-production ramp 支持存在可规模生产的系统实现
+CER-041,CLM-037,EVD-021,limits,partial,medium,公告未披露逐板良率成本供应商覆盖或设计余量
+CER-042,CLM-038,EVD-021,context_only,partial,medium,系统量产状态只提供背景而不承重未披露制造 KPI
+CER-043,CLM-039,EVD-019,supports,exact,high,NVIDIA CPO 产品证明特定网络范围存在光迁移路线
+CER-044,CLM-039,EVD-017,supports,partial,high,同代系统仍有 PCB midplane 与大量铜缆说明距离和范围需具体化
+CER-045,CLM-040,EVD-017,supports,exact,high,光网络时代的计算托盘仍使用 PCB midplane
+CER-046,CLM-040,EVD-019,supports,partial,medium,CPO 的公开适用域仅为特定网络交换产品

@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "graph_status": "working_draft",
+  "source_conversation_id": "6a9117d5-128c-83ee-a9e2-5ec1cbb8cb01",
+  "required_files": [
+    "tree.yaml",
+    "graph/concepts.csv",
+    "graph/claims.csv",
+    "graph/evidence.csv",
+    "graph/claim_evidence.csv",
+    "graph/knowledge_edges.csv",
+    "graph/open_questions.csv"
+  ],
+  "enums": {
+    "claim_class": ["definition", "process", "generic_mechanism", "application_observation", "application_inference", "negative_constraint"],
+    "verdict": ["pending", "supported", "partially_supported", "refuted", "publicly_unverifiable"],
+    "confidence": ["none", "low", "medium", "high"],
+    "evidence_relation": ["supports", "refutes", "limits", "context_only"],
+    "scope_match": ["exact", "partial", "generic_only", "mismatch"],
+    "source_role": ["primary_standard", "primary_company", "primary_research"],
+    "edge_polarity": ["positive", "negative", "conditional"]
+  },
+  "expected_discussion_claim_ids": [
+    "CLM-001", "CLM-002", "CLM-003", "CLM-004", "CLM-005", "CLM-006", "CLM-007", "CLM-008", "CLM-009", "CLM-010",
+    "CLM-011", "CLM-012", "CLM-013", "CLM-014", "CLM-015", "CLM-016", "CLM-017", "CLM-018", "CLM-019", "CLM-020",
+    "CLM-021", "CLM-022", "CLM-023", "CLM-024", "CLM-025", "CLM-026", "CLM-027", "CLM-028", "CLM-029", "CLM-030",
+    "CLM-031", "CLM-032", "CLM-033", "CLM-034", "CLM-035", "CLM-036", "CLM-037", "CLM-038", "CLM-039", "CLM-040"
+  ]
+}

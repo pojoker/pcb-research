@@ -1,0 +1,41 @@
+claim_id,statement,scope,claim_class,verdict,confidence,subject_concept_id,conversation_turn_id,verification_note
+CLM-001,PCB 是用于机械承载元件并以导电图形实现电连接的印刷电路板,通用定义,definition,supported,high,CON-PCB,14454142-e1ef-4c15-94e6-fb5cfe9459ff,NASA 标准直接支持且机械承载限于支撑基板语义
+CLM-002,裸 PCB 与已完成元件装联的 PCBA 不是同一制造状态,通用定义,definition,supported,high,CON-PCBA,5b5c765f-9699-40a5-86c6-f02308cf175e,NASA 与 IPC 独立定义共同支持
+CLM-003,CCL 是 PCB 制造的板厂投入材料而 PCB 是经图形与孔互连等加工后的成品裸板,通用定义,definition,supported,high,CON-CCL,14454142-e1ef-4c15-94e6-fb5cfe9459ff,NASA 材料与制造流程支持
+CLM-004,典型刚性玻纤增强 CCL 主要由铜箔树脂体系和玻纤布构成,典型刚性玻纤增强 CCL,definition,supported,high,CON-CCL,c7353835-1fd8-46e1-acca-f5d8eab3c94f,仅在典型刚性玻纤增强范围内成立
+CLM-005,并非所有 CCL 都使用玻纤布增强,CCL 全体,negative_constraint,supported,high,CON-CCL,2e98bb28-1fab-4ddb-a3c1-06ad8fff9823,DuPont 全聚酰亚胺覆铜材料提供产品反例
+CLM-006,Core 强调完全固化且具有固定厚度的芯层材料而不要求已经形成内层线路,多层 PCB 材料形态,definition,supported,high,CON-CORE,2e98bb28-1fab-4ddb-a3c1-06ad8fff9823,Isola 明确区分完全固化 laminate 与线路加工状态
+CLM-007,Prepreg 在压合前处于可在加热加压下流动并进一步固化的材料状态,多层 PCB 材料形态,definition,supported,high,CON-PREPREG,5b5c765f-9699-40a5-86c6-f02308cf175e,Isola 工艺指南直接支持
+CLM-008,同类玻纤布布种可以用于制造 core 和 prepreg,玻纤增强层压材料,application_observation,supported,high,CON-GLASS-CLOTH,e1f23ebe-fdd3-45ca-bc83-946a73197baf,Isola 同一测试结构的 1080 实例直接支持
+CLM-009,Core 与 prepreg 的整体材料状态和加工要求不同不等于玻纤布本身必然不同,玻纤增强层压材料,negative_constraint,partially_supported,high,CON-GLASS-CLOTH,e1f23ebe-fdd3-45ca-bc83-946a73197baf,共同 glass style 获证但材料整体状态仍不同
+CLM-010,典型多层 PCB 制造包含内层图形压合钻孔孔金属化外层图形阻焊表面处理成型与测试,典型多层刚性 PCB,process,supported,high,CON-MULTILAYER,5b5c765f-9699-40a5-86c-f02308cf175e,NASA 与 TTM 流程交叉支持且不泛化到全部路线
+CLM-011,孔金属化在绝缘孔壁形成导电层以连接不同铜层,典型镀通孔 PCB,process,supported,high,CON-VIA,5b5c765f-9699-40a5-86c-f02308cf175e,ECSS 标准定义直接支持
+CLM-012,增加层数可以增加可用布线层并容纳更多互连,多层 PCB,generic_mechanism,supported,medium,CON-MULTILAYER,5516013d-d49e-43cc-81ca-c279b93e4c3b,一般规律成立但不等于具体产品层数
+CLM-013,高速信号层邻近连续参考平面有助于形成受控回流路径和阻抗,高速多层 PCB,generic_mechanism,supported,high,CON-GROUND-PLANE,5516013d-d49e-43cc-81ca-c279b93e4c3b,TI 高速设计指南直接支持
+CLM-014,用参考平面隔离和合理层叠可以降低某些串扰与电磁耦合,高速多层 PCB,generic_mechanism,supported,high,CON-CROSSTALK,5516013d-d49e-43cc-81ca-c279b93e4c3b,结果仍依赖几何频率和拓扑
+CLM-015,高速数字走线需要按传输线而非理想导线处理,高速互连,generic_mechanism,supported,high,CON-IMPEDANCE,6ad6bdde-839b-4f3d-9cfe-4ab53d5bb50d,TI 高速接口指南直接支持
+CLM-016,介质损耗会随材料损耗特性和频率等条件影响高速链路插入损耗,高速互连,generic_mechanism,supported,high,CON-DIELECTRIC-LOSS,73e3cab4-4ce7-4e77-a3cc-44c6c8bbc193,NIST 测量模型与 Isola 材料资料共同支持
+CLM-017,铜面粗糙度会增加高频导体损耗,高速铜互连,generic_mechanism,supported,high,CON-COPPER-ROUGHNESS,73e3cab4-4ce7-4e77-a3cc-44c6c8bbc193,Rogers 可比测试直接支持
+CLM-018,走线宽度间距铜厚和介质厚度会共同影响 PCB 传输线阻抗,受控阻抗互连,generic_mechanism,supported,high,CON-IMPEDANCE,73e3cab4-4ce7-4e77-a3cc-44c6c8bbc193,TI 设计指南支持多几何变量共同控制
+CLM-019,未使用的 via stub 可在高速链路产生阻抗不连续与谐振问题,高速过孔,generic_mechanism,supported,high,CON-VIA-STUB,73e3cab4-4ce7-4e77-a3cc-44c6c8bbc193,TI 高速指南直接支持
+CLM-020,背钻可用于去除不需要的 via stub,背钻工艺,process,supported,high,CON-BACKDRILL,73e3cab4-4ce7-4e77-a3cc-44c6c8bbc193,TI 高速指南直接支持
+CLM-021,高引脚数和更高互连数量会提高 BGA 逃线与布线密度压力,高引脚数封装,generic_mechanism,supported,medium,CON-ROUTING-DENSITY,73e3cab4-4ce7-4e77-a3cc-44c6c8bbc193,NASA NEPP 技术综述支持条件化关系
+CLM-022,互连数量增加可能通过更多层更细线路或 HDI 微孔等多种路径解决而非必然采用任意层 HDI,高密度板,negative_constraint,pending,none,CON-HDI,2e98bb28-1fab-4ddb-a3c1-06ad8fff9823,需保留替代路线
+CLM-023,大电流路径的电阻损耗按 I 平方 R 增长并要求板级 PDN 控制阻抗与温升,板级供电,generic_mechanism,supported,high,CON-I2R,73e3cab4-4ce7-4e77-a3cc-44c6c8bbc193,NIST 基础关系与 Intel 板级研究共同支持且不推出具体铜厚
+CLM-024,GB300 NVL72 包含 18 个计算托盘和 9 个 NVLink 交换托盘,GB300 NVL72,application_observation,supported,high,CON-GB300,c18007e9-09cc-4fed-a8cd-d5e1d015974a,NVIDIA 官方组件页直接支持
+CLM-025,GB300 计算托盘包含 Grace CPU Blackwell GPU 网络与其他系统组件,GB300 compute tray,application_observation,supported,high,CON-COMPUTE-TRAY,c18007e9-09cc-4fed-a8cd-d5e1d015974a,NVIDIA 官方组件页直接支持且精确数量见证据定位
+CLM-026,Compute Tray 是 GB300 中 PCB 面积板数量或采购价值量最大的部分,GB300 NVL72,application_inference,publicly_unverifiable,none,CON-COMPUTE-TRAY,c18007e9-09cc-4fed-a8cd-d5e1d015974a,缺少逐板 BOM 尺寸层数单价和一致加总口径
+CLM-027,NVLink NVSwitch 或高速网络 PCB 是 GB300 中技术要求最高的板,GB300 NVL72,application_inference,publicly_unverifiable,none,CON-SWITCH-TRAY,c18007e9-09cc-4fed-a8cd-d5e1d015974a,技术要求未定义且缺少跨板同口径工程与良率数据
+CLM-028,对不同 GB300 板卡给出的星级技术难度属于主观分析而非公开技术评级,GB300 NVL72,negative_constraint,pending,none,CON-GB300,2e98bb28-1fab-4ddb-a3c1-06ad8fff9823,评级不能作为事实节点
+CLM-029,NVLink 每 GPU 总带宽增加不能单独证明每条电气通道速率同比增加,NVLink 代际比较,negative_constraint,supported,high,CON-NVLINK,2e98bb28-1fab-4ddb-a3c1-06ad8fff9823,官方表显示总带宽和最大 links 数同时翻倍
+CLM-030,Spectrum-6 官方披露使用 200G SerDes,Spectrum-6,application_observation,supported,high,CON-SPECTRUM6,2e98bb28-1fab-4ddb-a3c1-06ad8fff9823,NVIDIA 官方 Rubin 平台资料直接支持
+CLM-031,Rubin 计算托盘使用中央 PCB midplane 替代托盘内部部分传统线缆连接,Rubin compute tray,application_observation,supported,high,CON-PCB-MIDPLANE,2e98bb28-1fab-4ddb-a3c1-06ad8fff9823,NVIDIA 官方披露且范围限定托盘内部
+CLM-032,Rubin 机架级 NVLink spine 仍使用大量铜缆,Rubin rack,application_observation,supported,high,CON-COPPER-CABLE,2e98bb28-1fab-4ddb-a3c1-06ad8fff9823,NVIDIA 官方披露约五千根铜缆及四个 cable cartridges
+CLM-033,Rubin 托盘内部采用 PCB midplane 不能推出 NVIDIA 整体把所有线缆互联迁移到 PCB,NVIDIA system,negative_constraint,supported,high,CON-PCB-MIDPLANE,2e98bb28-1fab-4ddb-a3c1-06ad8fff9823,同一官方系统同时存在托盘 midplane 与机架铜缆
+CLM-034,增加 PCB midplane 必然提高整个系统 PCB 净价值量,Rubin compute tray,application_inference,publicly_unverifiable,none,CON-PCB-MIDPLANE,2e98bb28-1fab-4ddb-a3c1-06ad8fff9823,缺少新增板与被替代线缆连接板的系统 BOM 差额
+CLM-035,NVIDIA 特定板卡已经采用指定低 Df 材料 HVLP 铜箔特定 HDI 微孔层数或厚铜,NVIDIA specific boards,application_inference,publicly_unverifiable,none,CON-STACKUP,2e98bb28-1fab-4ddb-a3c1-06ad8fff9823,缺少具体产品 stack-up Gerber 截面材料牌号与供应链一手披露
+CLM-036,高速服务器或交换机板不必然大量采用任意层 HDI 或 stacked microvia,高速大尺寸 PCB,negative_constraint,pending,none,CON-HDI,2e98bb28-1fab-4ddb-a3c1-06ad8fff9823,机械钻背钻与高层数可能是替代路径
+CLM-037,Rubin 进入量产只能证明至少存在可制造合格系统的工艺与供应链,Rubin production,negative_constraint,partially_supported,medium,CON-RUBIN-TRAY,2e98bb28-1fab-4ddb-a3c1-06ad8fff9823,量产状态获证但公告不承重逐板良率成本或覆盖
+CLM-038,Rubin 量产状态不能单独证明 PCB 良率高成本成熟供应商广泛或性能余量充足,Rubin production,negative_constraint,publicly_unverifiable,none,CON-YIELD,2e98bb28-1fab-4ddb-a3c1-06ad8fff9823,公开量产公告未披露所列制造 KPI
+CLM-039,更远距离高速互联存在从铜向光迁移的系统路线但适用距离与代际必须具体化,AI scale-up and scale-out,application_observation,supported,high,CON-OPTICAL-INTERCONNECT,2e98bb28-1fab-4ddb-a3c1-06ad8fff9823,NVIDIA CPO 产品与 Rubin 系统并存事实共同支持
+CLM-040,光互联增加不等于 PCB 消失且芯片附近短距离电互联仍需要 PCB,AI systems,negative_constraint,supported,high,CON-PCB,2e98bb28-1fab-4ddb-a3c1-06ad8fff9823,CPO 网络与计算托盘 PCB midplane 在同代系统中并存
