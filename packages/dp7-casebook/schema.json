@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "DP7 manually adjudicated casebook input",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "cases", "references"],
+  "properties": {
+    "schema_version": {"const": "dp7.casebook.input.v1"},
+    "cases": {"type": "array", "items": {"$ref": "#/$defs/case"}},
+    "references": {"type": "array", "items": {"$ref": "#/$defs/reference"}}
+  },
+  "$defs": {
+    "anchor": {
+      "type": "object", "additionalProperties": false,
+      "required": ["anchor_type", "anchor_locator"],
+      "properties": {"anchor_type": {"enum": ["url", "local_file", "ledger_ref", "search_protocol", "web_snapshot"]}, "anchor_locator": {"type": "string", "minLength": 1}}
+    },
+    "case": {
+      "type": "object", "additionalProperties": false,
+      "required": ["case_id", "title", "human_conclusion", "grade", "slot_references", "process_ladder", "evidence_chain", "alternative_explanations", "trap_checks", "remaining_unknowns", "overturn_conditions", "adjudicator", "adjudication_date", "version"],
+      "properties": {
+        "case_id": {"type": "string", "minLength": 1}, "title": {"type": "string", "minLength": 1}, "human_conclusion": {"type": "string", "minLength": 1}, "grade": {"enum": ["A", "B", "C", "D"]},
+        "slot_references": {"type": "array", "minItems": 1}, "process_ladder": {"type": "object"}, "evidence_chain": {"type": "array", "minItems": 1}, "alternative_explanations": {"type": "array", "minItems": 1}, "trap_checks": {"type": "object"}, "remaining_unknowns": {"type": "string", "minLength": 1}, "overturn_conditions": {"type": "string", "minLength": 1}, "adjudicator": {"type": "string", "minLength": 1}, "adjudication_date": {"type": "string", "format": "date"}, "version": {"type": "string", "minLength": 1}
+      }
+    },
+    "reference": {
+      "type": "object", "additionalProperties": false,
+      "required": ["reference_id", "case_id", "consumer_type", "consumer_id", "usage", "anchor"],
+      "properties": {"reference_id": {"type": "string", "minLength": 1}, "case_id": {"type": "string", "minLength": 1}, "consumer_type": {"type": "string", "minLength": 1}, "consumer_id": {"type": "string", "minLength": 1}, "usage": {"enum": ["load_bearing", "background", "limit"]}, "anchor": {"$ref": "#/$defs/anchor"}}
+    }
+  }
+}

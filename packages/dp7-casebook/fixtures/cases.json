@@ -1,0 +1,19 @@
+{
+  "cases": [
+    {"name": "missing one of 13 traps", "mutation": "missing_trap", "expected": "trap_missing"},
+    {"name": "extra trap", "mutation": "extra_trap", "expected": "trap_unknown"},
+    {"name": "bad anchor type", "mutation": "bad_anchor_type", "expected": "anchor_type_invalid"},
+    {"name": "bad anchor locator", "mutation": "bad_anchor_locator", "expected": "anchor_locator_invalid"},
+    {"name": "C load-bearing", "mutation": "c_load_bearing", "expected": "grade_c_load_bearing"},
+    {"name": "D background", "mutation": "d_background", "expected": "grade_d_usage"},
+    {"name": "D load-bearing", "mutation": "d_load_bearing", "expected": "grade_d_usage"},
+    {"name": "dangling reference", "mutation": "dangling_reference", "expected": "reference_dangling"},
+    {"name": "A only one independence group", "mutation": "a_one_group", "expected": "grade_a_independence"},
+    {"name": "empty overturn condition", "mutation": "empty_overturn", "expected": "text_required"},
+    {"name": "unknown field", "mutation": "unknown_field", "expected": "unknown_field"},
+    {"name": "duplicate case ID", "mutation": "duplicate_case", "expected": "duplicate_case_id"},
+    {"name": "duplicate reference ID", "mutation": "duplicate_reference", "expected": "duplicate_reference_id"},
+    {"name": "unknown grade enum", "mutation": "unknown_grade", "expected": "grade_invalid"},
+    {"name": "bad adjudication date", "mutation": "bad_date", "expected": "date_invalid"}
+  ]
+}
