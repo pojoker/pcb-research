@@ -348,3 +348,8 @@
 - NVLink 物理层公开规范，用于区分 link、lane、编码开销、单向／双向带宽及实际信号速率。
 
 在这些材料出现前，知识图谱应把相应关系标为 `公开不可验` 或 `hypothesis`，而不是 `fact`。
+
+## 第二轮补充：HDI 不是唯一互连路线
+
+- [TI WiLink 8Q BGA Reference Guide](https://www.ti.com/lit/an/slda021a/slda021a.pdf) 对 0.65 mm pitch BGA 明确给出两条按成本与设计条件选择的逃线路线：16/8 mil 机械通孔方案与 HDI microvia 方案。这直接支持“密度压力不必然推出任意层 HDI”。
+- [TI AM570x Six-Layer PCB Reference Design](https://www.ti.com/tool/TIDEP-0100) 以六层板和较大机械孔实现全部信号逃线，并提供 DDR、HDMI、USB3、CSI-2 SerDes 与 PDN 验证资料。这是高速接口可采用非任意层 HDI 路线的产品级反例，但并非服务器或交换机大尺寸板，因此对该更窄应用命题只给部分支持。

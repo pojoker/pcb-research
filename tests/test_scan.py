@@ -73,6 +73,17 @@ class GraphValidationTests(unittest.TestCase):
         self.assertFalse(report.ok)
         self.assertTrue(any("publicly_unverifiable requires an open question" in error for error in report.errors))
 
+    def test_analysis_annotation_cannot_masquerade_as_supported_fact(self):
+        root = self.copy_graph()
+
+        def mutate(rows):
+            next(row for row in rows if row["claim_id"] == "CLM-028")["verdict"] = "supported"
+
+        self.rewrite_csv(root / "graph/claims.csv", mutate)
+        report = validate_graph(root)
+        self.assertFalse(report.ok)
+        self.assertTrue(any("cannot masquerade as a factual verdict" in error for error in report.errors))
+
 
 if __name__ == "__main__":
     unittest.main()

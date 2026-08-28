@@ -12,8 +12,8 @@
     "graph/open_questions.csv"
   ],
   "enums": {
-    "claim_class": ["definition", "process", "generic_mechanism", "application_observation", "application_inference", "negative_constraint"],
-    "verdict": ["pending", "supported", "partially_supported", "refuted", "publicly_unverifiable"],
+    "claim_class": ["definition", "process", "generic_mechanism", "application_observation", "application_inference", "negative_constraint", "analysis_annotation"],
+    "verdict": ["pending", "supported", "partially_supported", "refuted", "publicly_unverifiable", "analyst_annotation"],
     "confidence": ["none", "low", "medium", "high"],
     "evidence_relation": ["supports", "refutes", "limits", "context_only"],
     "scope_match": ["exact", "partial", "generic_only", "mismatch"],

@@ -16,10 +16,10 @@
 
 ## 当前快照
 
-- 40 条讨论主张已全部原子化：30 条支持、2 条部分支持、5 条公开不可验、3 条待核。
-- 23 份一手来源通过 46 条证据关系承重；证据关系与概念关系分表保存。
+- 40 条讨论主张已全部原子化：31 条支持、3 条部分支持、5 条公开不可验、1 条分析标注、0 条待核。
+- 25 份一手来源通过 49 条证据关系承重；证据关系与概念关系分表保存。
 - 5 个公开不可验命题均有重开条件，覆盖价值量排名、技术难度排名、midplane 净价值量、NVIDIA 板级制造参数和 Rubin PCB 制造 KPI。
-- 待核命题保留为 `pending`，目前是 HDI 替代路线、星级评级来源和高速大尺寸板不必然采用任意层 HDI；它们不会进入事实结论。
+- 讨论中的星级评级归入 `analyst_annotation`；它不是公开事实评级，不会进入事实结论。
 
 ## 判定纪律
 
@@ -29,5 +29,6 @@
 4. `publicly_unverifiable` 必须进入 `open_questions.csv`，写明缺失证据与重开条件。
 5. `application_observation` 或 `application_inference` 主张若要判 `supported`，必须有具体产品一手来源且 `scope_match=exact`；通用标准只能提供背景。
 6. `does_not_imply` 是正式知识边，用来阻断从前提到过宽结论的自动升级。
+7. `analyst_annotation` 只能搭配同名 claim class；校验器禁止把它改写为事实裁决。
 
 运行 `python3 scan.py --check` 校验 schema、ID、端点、证据边、适用域和讨论命题覆盖。

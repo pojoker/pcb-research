@@ -221,6 +221,10 @@ def validate_graph(root: Path = ROOT) -> Report:
                 report.error(f"{claim_id}: partially_supported requires supports plus limits/refutes")
         if verdict == "publicly_unverifiable" and claim_id not in question_claims:
             report.error(f"{claim_id}: publicly_unverifiable requires an open question")
+        if verdict == "analyst_annotation" and claim.get("claim_class") != "analysis_annotation":
+            report.error(f"{claim_id}: analyst_annotation verdict requires analysis_annotation claim class")
+        if claim.get("claim_class") == "analysis_annotation" and verdict != "analyst_annotation":
+            report.error(f"{claim_id}: analysis_annotation claim class cannot masquerade as a factual verdict")
         if verdict == "supported" and claim.get("claim_class") in {"application_observation", "application_inference"}:
             exact_company_support = any(
                 row.get("relation") == "supports"

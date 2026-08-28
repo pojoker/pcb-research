@@ -45,3 +45,6 @@ CER-043,CLM-039,EVD-019,supports,exact,high,NVIDIA CPO 产品证明特定网络�
 CER-044,CLM-039,EVD-017,supports,partial,high,同代系统仍有 PCB midplane 与大量铜缆说明距离和范围需具体化
 CER-045,CLM-040,EVD-017,supports,exact,high,光网络时代的计算托盘仍使用 PCB midplane
 CER-046,CLM-040,EVD-019,supports,partial,medium,CPO 的公开适用域仅为特定网络交换产品
+CER-047,CLM-022,EVD-024,supports,exact,high,同一 BGA 逃线存在机械通孔与 HDI 微孔两条条件化路线
+CER-048,CLM-036,EVD-025,supports,partial,medium,经高速接口验证的六层板使用较大机械孔而非任意层 HDI
+CER-049,CLM-036,EVD-025,limits,partial,high,参考板不是服务器或交换机大尺寸板故不能升级为具体产品采用结论
