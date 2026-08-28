@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "status": "draft_pending_human_gate",
+  "status": "frozen",
   "root_question": "什么是 PCB 裸板制造",
   "source_spec": "docs/03-结构骨架.md",
   "cells": [
@@ -44,5 +44,6 @@
     {"axis_id": "F", "name": "特殊工艺", "values": ["厚铜", "埋嵌铜块", "高频混压", "大尺寸厚背板", "散热结构"]}
   ],
   "demand_scenarios": ["通信设备", "服务器与 AI 加速", "汽车电子", "消费电子", "工控医疗", "航空航天军工", "半导体封装", "存储与模组"],
-  "outside_neighbors": ["PCBA", "SMT", "锂电铜箔", "整机"]
+  "outside_neighbor_policy": "OUT is a tree-external namespace label, not a physical cell_id; outside neighbors must not be attached to FAB cells or aggregated with finished-board output.",
+  "outside_neighbors": ["PCBA", "SMT", "EMS", "设计", "锂电铜箔", "整机"]
 }
